@@ -21,6 +21,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/crm/store', [CRMController::class, 'store'])->name('crm.store');
     Route::get('/crm/list', [CRMController::class, 'index'])->name('crm.index');
 
+    // AJAX: Interaction history by phone
+    Route::get('/crm/history', [CRMController::class, 'history'])->name('crm.history');
+
     // FAQ Search API
     Route::get('/light-of-hope/crm/faq/search', [FAQController::class, 'search'])
         ->name('faq.search');

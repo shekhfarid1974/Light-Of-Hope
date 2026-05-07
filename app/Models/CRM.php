@@ -22,18 +22,52 @@ class CRM extends Model
         'child_name',
         'class',
         'interested_for',
+        'calling_status',
+        'query_source',
+        'query_status',
         'assigned_person',
+        'agent',
         'remarks',
         'data_source_id',
     ];
 
-    public function dataSource()
-    {
-        return $this->belongsTo(DataSource::class);
-    }
+    // ---- Dropdown option constants ----
+    public static array $interestedForOptions = [
+        'Live Online Class',
+        'Center Based Class',
+    ];
 
+    public static array $callingStatusOptions = [
+        'Enrolled',
+        'Trial Class',
+        'Pending',
+        'Cancel',
+        'No Interaction',
+        'No Communication',
+    ];
+
+    public static array $querySourceOptions = [
+        'WhatsApp',
+        'Messenger',
+        'FB Comment',
+        'Other',
+    ];
+
+    public static array $queryStatusOptions = [
+        'Done',
+        'Pending',
+        'Cancel',
+        'No Interaction',
+    ];
+
+    // ---- Relationships ----
     public function district()
     {
         return $this->belongsTo(District::class);
+    }
+
+    public function dataSource()
+    {
+        return $this->belongsTo(DataSource::class);
     }
 }

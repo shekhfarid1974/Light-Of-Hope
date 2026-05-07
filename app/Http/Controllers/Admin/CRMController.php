@@ -41,6 +41,10 @@ class CRMController extends Controller
             'interested_for',
             'assigned_person',
             'remarks',
+            'agent',
+            'calling_status',
+            'query_source',
+            'query_status',
             'data_source_id',
         ]));
 
