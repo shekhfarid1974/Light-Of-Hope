@@ -1,0 +1,60 @@
+# Setup Notes
+
+## 1. Run after copying files
+
+```bash
+php artisan storage:link
+php artisan migrate:fresh --seed
+```
+
+## 2. Add DataTables Buttons CDN to `layouts/app.blade.php`
+
+The CRM index uses export buttons (CSV, Excel, Print). Add these lines **after** the existing DataTables CSS/JS:
+
+### In <head> (CSS):
+```html
+<link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" rel="stylesheet">
+```
+
+### Before </body> (JS — after datatables.min.js):
+```html
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+```
+
+## 3. CRM Model — make sure `$fillable` includes all fields
+
+```php
+protected $fillable = [
+    'parents_name', 'phone', 'email', 'profession',
+    'district_id', 'child_gender', 'child_age', 'child_name',
+    'class', 'interested_for', 'assigned_person', 'remarks',
+    'data_source_id',
+];
+```
+
+## 4. File placement
+
+| Output file                           | Copy to                                                      |
+|---------------------------------------|--------------------------------------------------------------|
+| views/admin/dashboard.blade.php       | resources/views/admin/dashboard.blade.php                    |
+| views/admin/crm/form.blade.php        | resources/views/admin/crm/form.blade.php                     |
+| views/admin/crm/index.blade.php       | resources/views/admin/crm/index.blade.php                    |
+| views/admin/datasource/index.blade.php| resources/views/admin/datasource/index.blade.php             |
+| views/admin/district/index.blade.php  | resources/views/admin/district/index.blade.php               |
+| views/admin/faq/index.blade.php       | resources/views/admin/faq/index.blade.php                    |
+| Controllers/CRMController.php         | app/Http/Controllers/Admin/CRMController.php                 |
+| Controllers/DataSourceController.php  | app/Http/Controllers/Admin/DataSourceController.php          |
+| Controllers/DistrictController.php    | app/Http/Controllers/Admin/DistrictController.php            |
+| Controllers/FAQController.php         | app/Http/Controllers/Admin/FAQController.php                 |
+
+## 5. URL params for CRM form pre-fill
+
+The form auto-reads these from the URL:
+- `?phone_number=01XXXXXXXX` → fills Phone field
+- `?agent=AgentName`         → fills Assigned Person field
+- `?campaign=CampaignName`   → fills hidden campaign field
