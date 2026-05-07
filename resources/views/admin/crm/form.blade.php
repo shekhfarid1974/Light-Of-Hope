@@ -26,15 +26,11 @@
                 </div>
             </div>
 
-            {{-- Right: Block Number (UI only for now) --}}
+            {{-- Right: agent name (UI only for now) --}}
             <div class="col-md-4">
-                <label class="form-label fw-semibold small mb-1">Block Number</label>
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" placeholder="Block Number" id="blockNumberInput">
-                    <button class="btn btn-danger px-3" type="button" id="blockBtn">Block</button>
-                </div>
+                <label for="agentNameInput" class="form-label fw-semibold small mb-1">Agent Name</label>
+                <input type="text" class="form-control form-control-sm">
             </div>
-
         </div>
     </div>
 
@@ -434,20 +430,20 @@
                         : '—';
 
                     $tbody.append(`
-                    <tr>
-                        <td>#${r.id}</td>
-                        <td>${r.parents_name}</td>
-                        <td>${r.phone}</td>
-                        <td>${r.district}</td>
-                        <td>${r.interested_for || '—'}</td>
-                        <td>${cs}</td>
-                        <td>${r.query_source || '—'}</td>
-                        <td>${qs}</td>
-                        <td>${r.assigned_person}</td>
-                        <td>${r.data_source}</td>
-                        <td>${r.date}</td>
-                    </tr>
-                `);
+                                <tr>
+                                    <td>#${r.id}</td>
+                                    <td>${r.parents_name}</td>
+                                    <td>${r.phone}</td>
+                                    <td>${r.district}</td>
+                                    <td>${r.interested_for || '—'}</td>
+                                    <td>${cs}</td>
+                                    <td>${r.query_source || '—'}</td>
+                                    <td>${qs}</td>
+                                    <td>${r.assigned_person}</td>
+                                    <td>${r.data_source}</td>
+                                    <td>${r.date}</td>
+                                </tr>
+                            `);
                 });
 
                 $('#historyPrev').prop('disabled', currentPage === 0);
@@ -460,13 +456,6 @@
             $('#historyNext').on('click', function () {
                 if ((currentPage + 1) * PAGE_SIZE < allRecords.length) { currentPage++; renderPage(); }
             });
-
-            // ─── Block button (UI only) ──────────────────────────────────
-            $('#blockBtn').on('click', function () {
-                const num = $('#blockNumberInput').val().trim();
-                if (num) alert('Number ' + num + ' has been flagged. Implement block logic as needed.');
-            });
-
         });
     </script>
 @endpush
