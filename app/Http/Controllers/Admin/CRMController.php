@@ -14,8 +14,23 @@ class CRMController extends Controller
     {
         $districts   = District::orderBy('name')->get();
         $dataSources = DataSource::orderBy('name')->get();
+        
+        $options = \App\Models\CrmOption::all()->groupBy('type');
+        $interestedForOptions = $options->get('interested_for', collect());
+        $callingStatusOptions = $options->get('calling_status', collect());
+        $querySourceOptions = $options->get('query_source', collect());
+        $queryStatusOptions = $options->get('query_status', collect());
+        $assignedPersonOptions = $options->get('assigned_person', collect());
 
-        return view('admin.crm.form', compact('districts', 'dataSources'));
+        return view('admin.crm.form', compact(
+            'districts', 
+            'dataSources', 
+            'interestedForOptions', 
+            'callingStatusOptions', 
+            'querySourceOptions', 
+            'queryStatusOptions',
+            'assignedPersonOptions'
+        ));
     }
 
     public function store(Request $request)

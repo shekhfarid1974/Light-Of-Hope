@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CRMController;
 use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\DataSourceController;
+use App\Http\Controllers\Admin\CrmOptionController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -32,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('districts', DistrictController::class);
     Route::resource('data-sources', DataSourceController::class);
     Route::resource('faqs', FAQController::class);
+    Route::resource('crm-options', CrmOptionController::class)->except(['create', 'edit', 'show']);
 });
 
 require __DIR__.'/auth.php';

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.blank')
 
 @section('page-title', 'CRM Form')
 
@@ -69,7 +69,6 @@
             @csrf
 
             {{-- Hidden fields from URL --}}
-            <input type="hidden" name="assigned_person" id="assigned_person">
             <input type="hidden" name="campaign" id="campaign_field">
 
             {{-- ════════════════════════════════════════
@@ -169,9 +168,9 @@
                     <label class="form-label small fw-semibold">Interested For</label>
                     <select name="interested_for" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
-                        @foreach(\App\Models\CRM::$interestedForOptions as $opt)
-                            <option value="{{ $opt }}" {{ old('interested_for') == $opt ? 'selected' : '' }}>
-                                {{ $opt }}
+                        @foreach($interestedForOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('interested_for') == $opt->name ? 'selected' : '' }}>
+                                {{ $opt->name }}
                             </option>
                         @endforeach
                     </select>
@@ -197,9 +196,9 @@
                     <label class="form-label small fw-semibold">Calling Status</label>
                     <select name="calling_status" class="form-select form-select-sm">
                         <option value="">-- Select Status --</option>
-                        @foreach(\App\Models\CRM::$callingStatusOptions as $opt)
-                            <option value="{{ $opt }}" {{ old('calling_status') == $opt ? 'selected' : '' }}>
-                                {{ $opt }}
+                        @foreach($callingStatusOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('calling_status') == $opt->name ? 'selected' : '' }}>
+                                {{ $opt->name }}
                             </option>
                         @endforeach
                     </select>
@@ -209,9 +208,9 @@
                     <label class="form-label small fw-semibold">Query Source</label>
                     <select name="query_source" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
-                        @foreach(\App\Models\CRM::$querySourceOptions as $opt)
-                            <option value="{{ $opt }}" {{ old('query_source') == $opt ? 'selected' : '' }}>
-                                {{ $opt }}
+                        @foreach($querySourceOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('query_source') == $opt->name ? 'selected' : '' }}>
+                                {{ $opt->name }}
                             </option>
                         @endforeach
                     </select>
@@ -221,16 +220,24 @@
                     <label class="form-label small fw-semibold">Query Status</label>
                     <select name="query_status" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
-                        @foreach(\App\Models\CRM::$queryStatusOptions as $opt)
-                            <option value="{{ $opt }}" {{ old('query_status') == $opt ? 'selected' : '' }}>
-                                {{ $opt }}
+                        @foreach($queryStatusOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('query_status') == $opt->name ? 'selected' : '' }}>
+                                {{ $opt->name }}
                             </option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-md-4">
-                    {{-- Intentionally left for balance; add extra field here if needed --}}
+                    <label class="form-label small fw-semibold">Assigned Person</label>
+                    <select name="assigned_person" id="assigned_person" class="form-select form-select-sm">
+                        <option value="">-- Select --</option>
+                        @foreach($assignedPersonOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('assigned_person') == $opt->name ? 'selected' : '' }}>
+                                {{ $opt->name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="col-12">

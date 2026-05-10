@@ -156,6 +156,9 @@
         <a href="{{ route('faqs.index') }}" class="{{ request()->routeIs('faqs.*') ? 'active' : '' }}">
             <i class="bi bi-question-circle me-2"></i> FAQs
         </a>
+        <a href="{{ route('crm-options.index') }}" class="{{ request()->routeIs('crm-options.*') ? 'active' : '' }}">
+            <i class="bi bi-ui-radios me-2"></i> CRM Options
+        </a>
 
         <hr style="border-color:#334155; margin-top:16px;">
         <a href="{{ route('logout') }}"
