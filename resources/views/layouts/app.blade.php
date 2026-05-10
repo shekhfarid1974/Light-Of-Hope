@@ -128,7 +128,7 @@
 
     <!-- SIDEBAR -->
     <div class="sidebar">
-        <h3>CRM Admin</h3>
+        <h3>Light of Hope</h3>
 
         <div class="nav-section">Main</div>
         <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
