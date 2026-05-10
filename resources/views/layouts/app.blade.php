@@ -139,11 +139,11 @@
         {{-- Opens in NEW TAB with the full URL pattern --}}
         <a href="{{ route('crm.form') }}?phone_number=&agent={{ urlencode(auth()->user()->name) }}&campaign="
             target="_blank">
-            <i class="bi bi-plus-circle me-2"></i> Add CRM
+            <i class="bi bi-plus-circle me-2"></i> CRM Form
             <i class="bi bi-box-arrow-up-right ms-1" style="font-size:.7rem;opacity:.6;"></i>
         </a>
         <a href="{{ route('crm.index') }}" class="{{ request()->routeIs('crm.index') ? 'active' : '' }}">
-            <i class="bi bi-table me-2"></i> CRM List
+            <i class="bi bi-table me-2"></i> CRM Report
         </a>
 
         <div class="nav-section">Settings</div>
