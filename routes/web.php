@@ -11,11 +11,11 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+use App\Http\Controllers\Admin\DashboardController;
+
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // CRM
     Route::get('/crm/form', [CRMController::class, 'create'])->name('crm.form');

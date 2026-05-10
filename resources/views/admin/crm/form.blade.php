@@ -70,6 +70,7 @@
 
             {{-- Hidden fields from URL --}}
             <input type="hidden" name="campaign" id="campaign_field">
+            <input type="hidden" name="agent" id="agent_field">
 
             {{-- ════════════════════════════════════════
             SECTION 1 — Consumer Information
@@ -320,9 +321,9 @@
                 if (ph.length >= 6) loadHistory(ph);
             }
 
-            // assigned_person from URL → hidden field (saves as plain text, not shown on form)
             if (params.get('assigned_person')) $('#assigned_person').val(params.get('assigned_person'));
             if (params.get('campaign')) $('#campaign_field').val(params.get('campaign'));
+            if (params.get('agent')) $('#agent_field').val(params.get('agent'));
 
             // ─── FAQ AJAX Search ────────────────────────────────────────
             let faqTimer;

@@ -5,17 +5,25 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\DataSource;
-use App\Models\CRM;
+use App\Models\CrmOption;
+use App\Services\CrmService;
 use Illuminate\Http\Request;
 
 class CRMController extends Controller
 {
+    protected $crmService;
+
+    public function __construct(CrmService $crmService)
+    {
+        $this->crmService = $crmService;
+    }
+
     public function create()
     {
         $districts   = District::orderBy('name')->get();
         $dataSources = DataSource::orderBy('name')->get();
         
-        $options = \App\Models\CrmOption::all()->groupBy('type');
+        $options = CrmOption::all()->groupBy('type');
         $interestedForOptions = $options->get('interested_for', collect());
         $callingStatusOptions = $options->get('calling_status', collect());
         $querySourceOptions = $options->get('query_source', collect());
@@ -43,7 +51,7 @@ class CRMController extends Controller
             'district_id'    => 'nullable|exists:districts,id',
         ]);
 
-        CRM::create($request->only([
+        $this->crmService->createCrm($request->only([
             'parents_name',
             'phone',
             'email',
@@ -69,8 +77,17 @@ class CRMController extends Controller
 
     public function index()
     {
-        $crms = CRM::with(['district', 'dataSource'])->latest()->get();
+        $crms = $this->crmService->getAllCrms();
 
         return view('admin.crm.index', compact('crms'));
+    }
+
+    public function history(Request $request)
+    {
+        if (!$request->has('phone')) {
+            return response()->json([]);
+        }
+
+        return response()->json($this->crmService->getHistoryForAjax($request->phone));
     }
 }
