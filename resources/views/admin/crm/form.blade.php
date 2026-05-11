@@ -442,20 +442,20 @@
                         : '—';
 
                     $tbody.append(`
-                                    <tr>
-                                        <td>#${r.id}</td>
-                                        <td>${r.parents_name}</td>
-                                        <td>${r.phone}</td>
-                                        <td>${r.district}</td>
-                                        <td>${r.interested_for || '—'}</td>
-                                        <td>${cs}</td>
-                                        <td>${r.query_source || '—'}</td>
-                                        <td>${qs}</td>
-                                        <td>${r.assigned_person}</td>
-                                        <td>${r.data_source}</td>
-                                        <td>${r.date}</td>
-                                    </tr>
-                                `);
+                                        <tr>
+                                            <td>#${r.id}</td>
+                                            <td>${r.parents_name}</td>
+                                            <td>${r.phone}</td>
+                                            <td>${r.district}</td>
+                                            <td>${r.interested_for || '—'}</td>
+                                            <td>${cs}</td>
+                                            <td>${r.query_source || '—'}</td>
+                                            <td>${qs}</td>
+                                            <td>${r.assigned_person}</td>
+                                            <td>${r.data_source}</td>
+                                            <td>${r.date}</td>
+                                        </tr>
+                                    `);
                 });
 
                 $('#historyPrev').prop('disabled', currentPage === 0);
