@@ -29,7 +29,7 @@
             {{-- Right: agent name (UI only for now) --}}
             <div class="col-md-4">
                 <label for="agentNameInput" class="form-label fw-semibold small mb-1">Agent Name</label>
-                <input type="text" class="form-control form-control-sm">
+                <input class="form-control form-control-sm">
             </div>
         </div>
     </div>
@@ -438,20 +438,20 @@
                         : '—';
 
                     $tbody.append(`
-                                <tr>
-                                    <td>#${r.id}</td>
-                                    <td>${r.parents_name}</td>
-                                    <td>${r.phone}</td>
-                                    <td>${r.district}</td>
-                                    <td>${r.interested_for || '—'}</td>
-                                    <td>${cs}</td>
-                                    <td>${r.query_source || '—'}</td>
-                                    <td>${qs}</td>
-                                    <td>${r.assigned_person}</td>
-                                    <td>${r.data_source}</td>
-                                    <td>${r.date}</td>
-                                </tr>
-                            `);
+                                    <tr>
+                                        <td>#${r.id}</td>
+                                        <td>${r.parents_name}</td>
+                                        <td>${r.phone}</td>
+                                        <td>${r.district}</td>
+                                        <td>${r.interested_for || '—'}</td>
+                                        <td>${cs}</td>
+                                        <td>${r.query_source || '—'}</td>
+                                        <td>${qs}</td>
+                                        <td>${r.assigned_person}</td>
+                                        <td>${r.data_source}</td>
+                                        <td>${r.date}</td>
+                                    </tr>
+                                `);
                 });
 
                 $('#historyPrev').prop('disabled', currentPage === 0);

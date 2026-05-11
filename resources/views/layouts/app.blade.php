@@ -137,7 +137,7 @@
 
         <div class="nav-section">CRM</div>
         {{-- Opens in NEW TAB with the full URL pattern --}}
-        <a href="{{ route('crm.form') }}?phone_number=&agent={{ auth()->id() }}&campaign="
+        <a href="{{ route('crm.form') }}?phone_number=&agent="
             target="_blank">
             <i class="bi bi-plus-circle me-2"></i> CRM Form
             <i class="bi bi-box-arrow-up-right ms-1" style="font-size:.7rem;opacity:.6;"></i>

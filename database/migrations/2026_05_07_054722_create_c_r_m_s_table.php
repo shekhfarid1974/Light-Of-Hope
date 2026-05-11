@@ -26,7 +26,7 @@ return new class extends Migration
 
             $table->string('interested_for')->nullable();
             $table->text('remarks')->nullable();
-            $table->foreignId('agent')->nullable();
+            $table->string('agent');
 
             // New fields for CRM workflow
             $table->string('calling_status')->nullable();
