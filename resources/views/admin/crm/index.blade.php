@@ -35,6 +35,7 @@
                         <th>Query Source</th>
                         <th>Query Status</th>
                         <th>Assigned Person</th>
+                        <th>Agent</th>
                         <th>Data Source</th>
                         <th>Date</th>
                     </tr>
@@ -99,7 +100,8 @@
                                 @else —
                                 @endif
                             </td>
-                            <td>{{ $crm->agent->name ?? '—' }}</td>
+                            <td>{{ $crm->assigned_person ?? '—' }}</td>
+                            <td>{{ $crm->agent ?? '—' }}</td>
                             <td><span class="badge bg-light text-dark border">{{ $crm->dataSource->name ?? '—' }}</span></td>
                             <td>{{ $crm->created_at->format('d M Y') }}</td>
                         </tr>

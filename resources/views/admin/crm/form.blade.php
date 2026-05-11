@@ -29,7 +29,7 @@
             {{-- Right: agent name (UI only for now) --}}
             <div class="col-md-4">
                 <label for="agentNameInput" class="form-label fw-semibold small mb-1">Agent Name</label>
-                <input class="form-control form-control-sm">
+                <input id="agentNameInput" class="form-control form-control-sm" readonly placeholder="No agent detected">
             </div>
         </div>
     </div>
@@ -323,7 +323,11 @@
 
             if (params.get('assigned_person')) $('#assigned_person').val(params.get('assigned_person'));
             if (params.get('campaign')) $('#campaign_field').val(params.get('campaign'));
-            if (params.get('agent')) $('#agent_field').val(params.get('agent'));
+            if (params.get('agent')) {
+                const agent = params.get('agent');
+                $('#agent_field').val(agent);
+                $('#agentNameInput').val(agent);
+            }
 
             // ─── FAQ AJAX Search ────────────────────────────────────────
             let faqTimer;
