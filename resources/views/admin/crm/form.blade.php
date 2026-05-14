@@ -230,6 +230,18 @@
                 </div>
 
                 <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Call Back</label>
+                    <select name="call_back" class="form-select form-select-sm">
+                        <option value="">-- Select --</option>
+                        @foreach($callBackOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('call_back') == $opt->name ? 'selected' : '' }}>
+                                {{ $opt->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-4">
                     <label class="form-label small fw-semibold">Assigned Person</label>
                     <select name="assigned_person" id="assigned_person" class="form-select form-select-sm">
                         <option value="">-- Select --</option>

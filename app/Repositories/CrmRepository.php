@@ -34,4 +34,9 @@ class CrmRepository implements CrmRepositoryInterface
             ->latest()
             ->get();
     }
+
+    public function getCallBacks()
+    {
+        return CRM::whereNotNull('call_back')->latest()->get();
+    }
 }

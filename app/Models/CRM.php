@@ -28,6 +28,7 @@ class CRM extends Model
         'assigned_person',
         'agent',
         'remarks',
+        'call_back',
         'data_source_id',
     ];
 

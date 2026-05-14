@@ -55,4 +55,9 @@ class CrmService
             ];
         });
     }
+
+    public function getCallBackCrms()
+    {
+        return $this->crmRepository->getCallBacks();
+    }
 }

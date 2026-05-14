@@ -145,6 +145,9 @@
         <a href="{{ route('crm.index') }}" class="{{ request()->routeIs('crm.index') ? 'active' : '' }}">
             <i class="bi bi-table me-2"></i> CRM Report
         </a>
+        <a href="{{ route('crm.callback.report') }}" class="{{ request()->routeIs('crm.callback.report') ? 'active' : '' }}">
+            <i class="bi bi-telephone-inbound me-2"></i> Call Back Report
+        </a>
 
         <div class="nav-section">Settings</div>
         <a href="{{ route('data-sources.index') }}" class="{{ request()->routeIs('data-sources.*') ? 'active' : '' }}">

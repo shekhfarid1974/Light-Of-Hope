@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/crm/form', [CRMController::class, 'create'])->name('crm.form');
     Route::post('/crm/store', [CRMController::class, 'store'])->name('crm.store');
     Route::get('/crm/list', [CRMController::class, 'index'])->name('crm.index');
+    Route::get('/crm/call-back-report', [CRMController::class, 'callBackReport'])->name('crm.callback.report');
 
     // AJAX: Interaction history by phone
     Route::get('/crm/history', [CRMController::class, 'history'])->name('crm.history');

@@ -29,6 +29,7 @@ class CRMController extends Controller
         $querySourceOptions = $options->get('query_source', collect());
         $queryStatusOptions = $options->get('query_status', collect());
         $assignedPersonOptions = $options->get('assigned_person', collect());
+        $callBackOptions = $options->get('call_back', collect());
 
         return view('admin.crm.form', compact(
             'districts', 
@@ -37,7 +38,8 @@ class CRMController extends Controller
             'callingStatusOptions', 
             'querySourceOptions', 
             'queryStatusOptions',
-            'assignedPersonOptions'
+            'assignedPersonOptions',
+            'callBackOptions'
         ));
     }
 
@@ -68,6 +70,7 @@ class CRMController extends Controller
             'calling_status',
             'query_source',
             'query_status',
+            'call_back',
             'data_source_id',
         ]));
 
@@ -89,5 +92,11 @@ class CRMController extends Controller
         }
 
         return response()->json($this->crmService->getHistoryForAjax($request->phone));
+    }
+
+    public function callBackReport()
+    {
+        $crms = $this->crmService->getCallBackCrms();
+        return view('admin.crm.call_back_report', compact('crms'));
     }
 }
