@@ -76,7 +76,7 @@
             SECTION 1 — Consumer Information
             ════════════════════════════════════════ --}}
             <h6 class="fw-bold mb-3 pb-1" style="color:#2563eb; border-bottom:2px solid #2563eb;">
-                Consumer Information
+                Consumer Information (Course)
             </h6>
 
             <div class="row g-3 mb-4">
