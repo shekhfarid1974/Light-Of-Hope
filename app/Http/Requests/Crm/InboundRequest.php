@@ -14,12 +14,12 @@ class InboundRequest extends FormRequest
     public function rules()
     {
         return [
-            'parents_name'   => 'required|string|max:255', // Caller Name
-            'phone'          => 'required|string|max:20',
-            'email'          => 'nullable|email|max:255',
+            'parents_name' => 'required|string|max:255', // Caller Name
+            'phone' => 'required|string|max:20',
+            'email' => 'nullable|email|max:255',
             'data_source_id' => 'required|exists:data_sources,id',
-            'district_id'    => 'nullable|exists:districts,id',
-            
+            'district_id' => 'nullable|exists:districts,id',
+
             // Shared & Optional Fields
             'profession' => 'nullable|string|max:255',
             'child_gender' => 'nullable|string|max:255',
@@ -27,12 +27,12 @@ class InboundRequest extends FormRequest
             'child_name' => 'nullable|string|max:255',
             'class' => 'nullable|string|max:255',
             'interested_for' => 'nullable|string|max:255',
-            
+
             'trainee_name' => 'nullable|string|max:255',
             'trainee_age' => 'nullable|string|max:255',
             'experience' => 'nullable|string|max:255',
             'course_title' => 'nullable|string|max:255',
-            
+
             'assigned_person' => 'nullable|string|max:255',
             'remarks' => 'required|string',
             'agent' => 'nullable|string|max:255',

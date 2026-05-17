@@ -14,12 +14,12 @@ class CourseOutboundRequest extends FormRequest
     public function rules()
     {
         return [
-            'parents_name'   => 'required|string|max:255',
-            'phone'          => 'required|string|max:20',
-            'email'          => 'nullable|email|max:255',
+            'parents_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'nullable|email|max:255',
             'data_source_id' => 'required|exists:data_sources,id',
-            'district_id'    => 'nullable|exists:districts,id',
-            
+            'district_id' => 'nullable|exists:districts,id',
+
             'profession' => 'nullable|string|max:255',
             'child_gender' => 'nullable|string|max:255',
             'child_age' => 'nullable|string|max:255',
