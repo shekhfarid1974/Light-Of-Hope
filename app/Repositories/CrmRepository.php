@@ -7,9 +7,13 @@ use App\Repositories\Contracts\CrmRepositoryInterface;
 
 class CrmRepository implements CrmRepositoryInterface
 {
-    public function getAll()
+    public function getAll(string $type = null)
     {
-        return CRM::with(['district', 'dataSource'])->latest()->get();
+        $query = CRM::with(['district', 'dataSource'])->latest();
+        if ($type) {
+            $query->where('crm_type', $type);
+        }
+        return $query->get();
     }
 
     public function getRecent(int $limit)

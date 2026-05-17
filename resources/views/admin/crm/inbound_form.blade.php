@@ -76,7 +76,7 @@
             SECTION 1 — Consumer Information
             ════════════════════════════════════════ --}}
             <h6 class="fw-bold mb-3 pb-1" style="color:#2563eb; border-bottom:2px solid #2563eb;">
-                Consumer Information (Course)
+                Consumer Information (Combined Inbound)
             </h6>
 
             <div class="row g-3 mb-4">
@@ -152,6 +152,32 @@
                     <label class="form-label small fw-semibold">Class</label>
                     <input type="text" name="class" class="form-control form-control-sm" value="{{ old('class') }}"
                         placeholder="e.g. Grade 3">
+                </div>
+                
+                <hr class="w-100 my-3">
+                
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Trainee Name (If Teachers Training)</label>
+                    <input type="text" name="trainee_name" class="form-control form-control-sm"
+                        value="{{ old('trainee_name') }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Trainee Age</label>
+                    <input type="text" name="trainee_age" class="form-control form-control-sm" value="{{ old('trainee_age') }}"
+                        placeholder="e.g. 25 years">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Experience</label>
+                    <input type="text" name="experience" class="form-control form-control-sm" value="{{ old('experience') }}"
+                        placeholder="e.g. 5 Years">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Course Title</label>
+                    <input type="text" name="course_title" class="form-control form-control-sm" value="{{ old('course_title') }}"
+                        placeholder="e.g. Graphic Design">
                 </div>
 
             </div>
@@ -255,10 +281,10 @@
 
                 <div class="col-12">
                     <label class="form-label small fw-semibold">
-                        Remarks <span class="text-danger">*</span>
+                        Remarks / Query & Complaint <span class="text-danger">*</span>
                     </label>
                     <textarea name="remarks" class="form-control form-control-sm" rows="3"
-                        placeholder="Customer conversation notes...">{{ old('remarks') }}</textarea>
+                        placeholder="Customer conversation notes, query or complaint details...">{{ old('remarks') }}</textarea>
                 </div>
 
             </div>

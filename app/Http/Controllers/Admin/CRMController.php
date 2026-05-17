@@ -18,7 +18,7 @@ class CRMController extends Controller
         $this->crmService = $crmService;
     }
 
-    public function create()
+    public function create($type = 'course_outbound')
     {
         $districts   = District::orderBy('name')->get();
         $dataSources = DataSource::orderBy('name')->get();
@@ -31,7 +31,15 @@ class CRMController extends Controller
         $assignedPersonOptions = $options->get('assigned_person', collect());
         $callBackOptions = $options->get('call_back', collect());
 
-        return view('admin.crm.form', compact(
+        $view = 'admin.crm.form';
+        if ($type === 'teachers_training') {
+            $view = 'admin.crm.teachers_training_form';
+        } elseif ($type === 'inbound') {
+            $view = 'admin.crm.inbound_form';
+        }
+
+        return view($view, compact(
+            'type',
             'districts', 
             'dataSources', 
             'interestedForOptions', 
@@ -43,17 +51,24 @@ class CRMController extends Controller
         ));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $type = 'course_outbound')
     {
-        $request->validate([
-            'parents_name'   => 'required|string|max:255',
+        $rules = [
             'phone'          => 'required|string|max:20',
             'email'          => 'nullable|email|max:255',
             'data_source_id' => 'required|exists:data_sources,id',
             'district_id'    => 'nullable|exists:districts,id',
-        ]);
+        ];
 
-        $this->crmService->createCrm($request->only([
+        if ($type === 'teachers_training') {
+            $rules['trainee_name'] = 'required|string|max:255';
+        } else {
+            $rules['parents_name'] = 'required|string|max:255';
+        }
+
+        $request->validate($rules);
+
+        $data = $request->only([
             'parents_name',
             'phone',
             'email',
@@ -72,17 +87,33 @@ class CRMController extends Controller
             'query_status',
             'call_back',
             'data_source_id',
-        ]));
+            'trainee_name',
+            'trainee_age',
+            'experience',
+            'course_title',
+            'query_complaint',
+        ]);
+        
+        $data['crm_type'] = $type;
 
-        return redirect()->route('crm.form')
+        $this->crmService->createCrm($data);
+
+        return redirect()->route('crm.form', ['type' => $type])
             ->with('success', 'CRM record saved successfully.');
     }
 
-    public function index()
+    public function index($type = 'course_outbound')
     {
-        $crms = $this->crmService->getAllCrms();
+        $crms = $this->crmService->getAllCrms($type);
 
-        return view('admin.crm.index', compact('crms'));
+        $view = 'admin.crm.index';
+        if ($type === 'teachers_training') {
+            $view = 'admin.crm.teachers_training_index';
+        } elseif ($type === 'inbound') {
+            $view = 'admin.crm.inbound_index';
+        }
+
+        return view($view, compact('crms', 'type'));
     }
 
     public function history(Request $request)

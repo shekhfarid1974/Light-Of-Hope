@@ -12,6 +12,7 @@ class CRM extends Model
     protected $table = 'crms';
 
     protected $fillable = [
+        'crm_type',
         'parents_name',
         'phone',
         'email',
@@ -30,6 +31,11 @@ class CRM extends Model
         'remarks',
         'call_back',
         'data_source_id',
+        'trainee_name',
+        'trainee_age',
+        'experience',
+        'course_title',
+        'query_complaint',
     ];
 
     // ---- Dropdown option constants ----

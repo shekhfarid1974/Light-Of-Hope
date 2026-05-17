@@ -135,16 +135,34 @@
             <i class="bi bi-speedometer2 me-2"></i> Dashboard
         </a>
 
-        <div class="nav-section">CRM</div>
-        {{-- Opens in NEW TAB with the full URL pattern --}}
-        <a href="{{ route('crm.form') }}?phone_number=&agent="
-            target="_blank">
-            <i class="bi bi-plus-circle me-2"></i> CRM Form
+        <div class="nav-section">Course Outbound CRM</div>
+        <a href="{{ route('crm.form', ['type' => 'course_outbound']) }}?phone_number=&agent=" target="_blank" class="{{ request()->is('crm/form') || request()->is('crm/form/course_outbound') ? 'active' : '' }}">
+            <i class="bi bi-plus-circle me-2"></i> Course Form
             <i class="bi bi-box-arrow-up-right ms-1" style="font-size:.7rem;opacity:.6;"></i>
         </a>
-        <a href="{{ route('crm.index') }}" class="{{ request()->routeIs('crm.index') ? 'active' : '' }}">
-            <i class="bi bi-table me-2"></i> CRM Report
+        <a href="{{ route('crm.index', ['type' => 'course_outbound']) }}" class="{{ request()->is('crm/list') || request()->is('crm/list/course_outbound') ? 'active' : '' }}">
+            <i class="bi bi-table me-2"></i> Course Report
         </a>
+
+        <div class="nav-section">Teachers Training CRM</div>
+        <a href="{{ route('crm.form', ['type' => 'teachers_training']) }}?phone_number=&agent=" target="_blank" class="{{ request()->is('crm/form/teachers_training') ? 'active' : '' }}">
+            <i class="bi bi-plus-circle me-2"></i> Teachers Form
+            <i class="bi bi-box-arrow-up-right ms-1" style="font-size:.7rem;opacity:.6;"></i>
+        </a>
+        <a href="{{ route('crm.index', ['type' => 'teachers_training']) }}" class="{{ request()->is('crm/list/teachers_training') ? 'active' : '' }}">
+            <i class="bi bi-table me-2"></i> Teachers Report
+        </a>
+
+        <div class="nav-section">Inbound CRM</div>
+        <a href="{{ route('crm.form', ['type' => 'inbound']) }}?phone_number=&agent=" target="_blank" class="{{ request()->is('crm/form/inbound') ? 'active' : '' }}">
+            <i class="bi bi-plus-circle me-2"></i> Inbound Form
+            <i class="bi bi-box-arrow-up-right ms-1" style="font-size:.7rem;opacity:.6;"></i>
+        </a>
+        <a href="{{ route('crm.index', ['type' => 'inbound']) }}" class="{{ request()->is('crm/list/inbound') ? 'active' : '' }}">
+            <i class="bi bi-table me-2"></i> Inbound Report
+        </a>
+
+        <div class="nav-section">Combined Report</div>
         <a href="{{ route('crm.callback.report') }}" class="{{ request()->routeIs('crm.callback.report') ? 'active' : '' }}">
             <i class="bi bi-telephone-inbound me-2"></i> Call Back Report
         </a>

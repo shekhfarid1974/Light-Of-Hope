@@ -6,7 +6,7 @@
 
     <div class="card-box">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h6 class="fw-bold mb-0"><i class="bi bi-table"></i> Course Outbound CRM Records</h6>
+            <h6 class="fw-bold mb-0"><i class="bi bi-table"></i> Teachers Training CRM Records</h6>
             <a href="{{ route('crm.form', ['type' => $type]) }}?phone_number=&agent={{ urlencode(auth()->user()->name) }}&campaign="
                 target="_blank" class="btn btn-primary btn-sm">
                 <i class="bi bi-plus-circle"></i> Add New
@@ -25,14 +25,12 @@
                 <thead class="table-dark">
                     <tr>
                         <th>#</th>
-                        <th>Parent Name</th>
+                        <th>Trainee Name</th>
                         <th>Phone</th>
                         <th>District</th>
-                        <th>Child</th>
-                        <th>Class</th>
-                        <th>Interested For</th>
-                        <th>Calling Status</th>
-                        <th>Query Source</th>
+                        <th>Age</th>
+                        <th>Experience</th>
+                        <th>Course Title</th>
                         <th>Query Status</th>
                         <th>Assigned Person</th>
                         <th>Agent</th>
@@ -45,49 +43,18 @@
                         <tr>
                             <td>{{ $i + 1 }}</td>
                             <td>
-                                <strong>{{ $crm->parents_name }}</strong>
+                                <strong>{{ $crm->trainee_name }}</strong>
                                 @if($crm->email)
                                     <br><small class="text-muted">{{ $crm->email }}</small>
                                 @endif
                             </td>
                             <td>{{ $crm->phone }}</td>
                             <td>{{ $crm->district->name ?? '—' }}</td>
+                            <td>{{ $crm->trainee_age ?? '—' }}</td>
+                            <td>{{ $crm->experience ?? '—' }}</td>
                             <td>
-                                @if($crm->child_name)
-                                    {{ $crm->child_name }}
-                                    @if($crm->child_age)
-                                        <span class="badge bg-secondary">{{ $crm->child_age }}</span>
-                                    @endif
-                                @else
-                                    —
-                                @endif
-                            </td>
-                            <td>{{ $crm->class ?? '—' }}</td>
-                            <td>
-                                @if($crm->interested_for)
-                                    <span class="badge bg-primary">{{ $crm->interested_for }}</span>
-                                @else —
-                                @endif
-                            </td>
-                            <td>
-                                @php
-                                    $statusColor = [
-                                        'Enrolled' => 'success',
-                                        'Trial Class' => 'info',
-                                        'Pending' => 'warning',
-                                        'Cancel' => 'danger',
-                                        'No Interaction' => 'secondary',
-                                        'No Communication' => 'dark',
-                                    ][$crm->calling_status] ?? 'secondary';
-                                @endphp
-                                @if($crm->calling_status)
-                                    <span class="badge bg-{{ $statusColor }}">{{ $crm->calling_status }}</span>
-                                @else —
-                                @endif
-                            </td>
-                            <td>
-                                @if($crm->query_source)
-                                    <span class="badge bg-info text-dark">{{ $crm->query_source }}</span>
+                                @if($crm->course_title)
+                                    <span class="badge bg-primary">{{ $crm->course_title }}</span>
                                 @else —
                                 @endif
                             </td>

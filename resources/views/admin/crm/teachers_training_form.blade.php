@@ -76,31 +76,27 @@
             SECTION 1 — Consumer Information
             ════════════════════════════════════════ --}}
             <h6 class="fw-bold mb-3 pb-1" style="color:#2563eb; border-bottom:2px solid #2563eb;">
-                Consumer Information (Course)
+                Consumer Information (Teachers Training)
             </h6>
 
             <div class="row g-3 mb-4">
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">
-                        Parent's Name <span class="text-danger">*</span>
+                        Trainee Name <span class="text-danger">*</span>
                     </label>
-                    <input type="text" name="parents_name"
-                        class="form-control form-control-sm @error('parents_name') is-invalid @enderror"
-                        value="{{ old('parents_name') }}">
-                    @error('parents_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    <input type="text" name="trainee_name"
+                        class="form-control form-control-sm @error('trainee_name') is-invalid @enderror"
+                        value="{{ old('trainee_name') }}">
+                    @error('trainee_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">
-                        Child's Gender
+                        Experience
                     </label>
-                    <select name="child_gender" class="form-select form-select-sm">
-                        <option value="">-- Select Gender --</option>
-                        <option value="Male" {{ old('child_gender') == 'Male' ? 'selected' : '' }}>Male</option>
-                        <option value="Female" {{ old('child_gender') == 'Female' ? 'selected' : '' }}>Female</option>
-                        <option value="Other" {{ old('child_gender') == 'Other' ? 'selected' : '' }}>Other</option>
-                    </select>
+                    <input type="text" name="experience" class="form-control form-control-sm"
+                        value="{{ old('experience') }}" placeholder="e.g. 5 Years">
                 </div>
 
                 <div class="col-md-4">
@@ -137,21 +133,15 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Child's Name</label>
-                    <input type="text" name="child_name" class="form-control form-control-sm"
-                        value="{{ old('child_name') }}">
+                    <label class="form-label small fw-semibold">Trainee Age</label>
+                    <input type="text" name="trainee_age" class="form-control form-control-sm" value="{{ old('trainee_age') }}"
+                        placeholder="e.g. 25 years">
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Child's Age</label>
-                    <input type="text" name="child_age" class="form-control form-control-sm" value="{{ old('child_age') }}"
-                        placeholder="e.g. 8 years">
-                </div>
-
-                <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Class</label>
-                    <input type="text" name="class" class="form-control form-control-sm" value="{{ old('class') }}"
-                        placeholder="e.g. Grade 3">
+                    <label class="form-label small fw-semibold">Course Title</label>
+                    <input type="text" name="course_title" class="form-control form-control-sm" value="{{ old('course_title') }}"
+                        placeholder="e.g. Graphic Design">
                 </div>
 
             </div>
@@ -255,10 +245,10 @@
 
                 <div class="col-12">
                     <label class="form-label small fw-semibold">
-                        Remarks <span class="text-danger">*</span>
+                        Query & Complaint <span class="text-danger">*</span>
                     </label>
-                    <textarea name="remarks" class="form-control form-control-sm" rows="3"
-                        placeholder="Customer conversation notes...">{{ old('remarks') }}</textarea>
+                    <textarea name="query_complaint" class="form-control form-control-sm" rows="3"
+                        placeholder="Query or complaint details...">{{ old('query_complaint') }}</textarea>
                 </div>
 
             </div>

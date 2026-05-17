@@ -4,7 +4,7 @@ namespace App\Repositories\Contracts;
 
 interface CrmRepositoryInterface
 {
-    public function getAll();
+    public function getAll(string $type = null);
     public function getRecent(int $limit);
     public function count();
     public function create(array $data);

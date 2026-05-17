@@ -13,9 +13,9 @@ class CrmService
         $this->crmRepository = $crmRepository;
     }
 
-    public function getAllCrms()
+    public function getAllCrms(string $type = null)
     {
-        return $this->crmRepository->getAll();
+        return $this->crmRepository->getAll($type);
     }
 
     public function getDashboardCrms()

@@ -6,7 +6,7 @@
 
     <div class="card-box">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h6 class="fw-bold mb-0"><i class="bi bi-table"></i> Course Outbound CRM Records</h6>
+            <h6 class="fw-bold mb-0"><i class="bi bi-table"></i> Combined Inbound CRM Records</h6>
             <a href="{{ route('crm.form', ['type' => $type]) }}?phone_number=&agent={{ urlencode(auth()->user()->name) }}&campaign="
                 target="_blank" class="btn btn-primary btn-sm">
                 <i class="bi bi-plus-circle"></i> Add New
@@ -25,12 +25,12 @@
                 <thead class="table-dark">
                     <tr>
                         <th>#</th>
-                        <th>Parent Name</th>
+                        <th>Caller Name</th>
+                        <th>Trainee Name</th>
                         <th>Phone</th>
                         <th>District</th>
                         <th>Child</th>
-                        <th>Class</th>
-                        <th>Interested For</th>
+                        <th>Course/Interested</th>
                         <th>Calling Status</th>
                         <th>Query Source</th>
                         <th>Query Status</th>
@@ -50,6 +50,7 @@
                                     <br><small class="text-muted">{{ $crm->email }}</small>
                                 @endif
                             </td>
+                            <td>{{ $crm->trainee_name ?? '—' }}</td>
                             <td>{{ $crm->phone }}</td>
                             <td>{{ $crm->district->name ?? '—' }}</td>
                             <td>
@@ -62,10 +63,11 @@
                                     —
                                 @endif
                             </td>
-                            <td>{{ $crm->class ?? '—' }}</td>
                             <td>
                                 @if($crm->interested_for)
                                     <span class="badge bg-primary">{{ $crm->interested_for }}</span>
+                                @elseif($crm->course_title)
+                                    <span class="badge bg-info">{{ $crm->course_title }}</span>
                                 @else —
                                 @endif
                             </td>

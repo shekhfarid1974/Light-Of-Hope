@@ -12,17 +12,26 @@
         <table class="table table-hover align-middle" id="callbackTable">
             <thead class="table-light">
                 <tr>
+                    <th>Source (CRM)</th>
                     <th>Number</th>
-                    <th>Remarks</th>
+                    <th>Remarks / Query</th>
                     <th>Date</th>
                     <th>Time</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($crms as $crm)
+                @php
+                    $crmTypeFormatted = match($crm->crm_type) {
+                        'teachers_training' => 'Teachers Training',
+                        'inbound' => 'Inbound',
+                        default => 'Course Outbound',
+                    };
+                @endphp
                 <tr>
+                    <td><span class="badge bg-secondary">{{ $crmTypeFormatted }}</span></td>
                     <td>{{ $crm->phone }}</td>
-                    <td>{{ $crm->remarks }}</td>
+                    <td>{{ $crm->remarks ?? $crm->query_complaint }}</td>
                     <td>{{ $crm->created_at->format('d M Y') }}</td>
                     <td>{{ $crm->created_at->format('h:i A') }}</td>
                 </tr>
@@ -41,7 +50,7 @@
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ],
-            order: [[2, 'desc']]
+            order: [[3, 'desc']]
         });
     });
 </script>
