@@ -32,7 +32,19 @@ class CrmService
 
     public function createCrm(array $data)
     {
-        return $this->crmRepository->create($data);
+        $crm = $this->crmRepository->create($data);
+
+        if (!empty($data['call_back'])) {
+            \App\Models\CallBack::create([
+                'crm_id'  => $crm->id,
+                'name'    => $crm->parents_name ?? $crm->trainee_name ?? '—',
+                'date'    => $data['call_back_date'] ?? null,
+                'time'    => $data['call_back_time'] ?? null,
+                'remarks' => $crm->remarks ?? $crm->query_complaint,
+            ]);
+        }
+
+        return $crm;
     }
 
     public function getHistoryForAjax(string $phone)

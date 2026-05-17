@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class CallBack extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['crm_id', 'name', 'date', 'time', 'remarks'];
+
+    public function crm()
+    {
+        return $this->belongsTo(CRM::class, 'crm_id');
+    }
+}

@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\CRMController;
+use App\Http\Controllers\Admin\Crm\Outbound\CourseOutboundController;
+use App\Http\Controllers\Admin\Crm\Outbound\TeachersTrainingController;
+use App\Http\Controllers\Admin\Crm\Inbound\InboundController;
+use App\Http\Controllers\Admin\Crm\CallBackController;
+
 use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\DataSourceController;
@@ -17,15 +21,26 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // CRM
-    Route::get('/crm/form/{type?}', [CRMController::class, 'create'])->name('crm.form');
-    Route::post('/crm/store/{type?}', [CRMController::class, 'store'])->name('crm.store');
-    Route::get('/crm/list/{type?}', [CRMController::class, 'index'])->name('crm.index');
-    // Call Back Route
-    Route::get('/crm/call-back-report', [CRMController::class, 'callBackReport'])->name('crm.callback.report');
+    // CRM Course Outbound
+    Route::get('/crm/outbound/course/form', [CourseOutboundController::class, 'create'])->name('crm.course_outbound.form');
+    Route::post('/crm/outbound/course/store', [CourseOutboundController::class, 'store'])->name('crm.course_outbound.store');
+    Route::get('/crm/outbound/course/list', [CourseOutboundController::class, 'index'])->name('crm.course_outbound.index');
+    Route::get('/crm/outbound/course/history', [CourseOutboundController::class, 'history'])->name('crm.course_outbound.history');
 
-    // AJAX: Interaction history by phone
-    Route::get('/crm/history', [CRMController::class, 'history'])->name('crm.history');
+    // CRM Teachers Training Outbound
+    Route::get('/crm/outbound/teachers-training/form', [TeachersTrainingController::class, 'create'])->name('crm.teachers_training.form');
+    Route::post('/crm/outbound/teachers-training/store', [TeachersTrainingController::class, 'store'])->name('crm.teachers_training.store');
+    Route::get('/crm/outbound/teachers-training/list', [TeachersTrainingController::class, 'index'])->name('crm.teachers_training.index');
+    Route::get('/crm/outbound/teachers-training/history', [TeachersTrainingController::class, 'history'])->name('crm.teachers_training.history');
+
+    // CRM Inbound
+    Route::get('/crm/inbound/form', [InboundController::class, 'create'])->name('crm.inbound.form');
+    Route::post('/crm/inbound/store', [InboundController::class, 'store'])->name('crm.inbound.store');
+    Route::get('/crm/inbound/list', [InboundController::class, 'index'])->name('crm.inbound.index');
+    Route::get('/crm/inbound/history', [InboundController::class, 'history'])->name('crm.inbound.history');
+
+    // Call Back Route
+    Route::get('/crm/call-back-report', [CallBackController::class, 'index'])->name('crm.callback.report');
 
     // FAQ Search API
     Route::get('/light-of-hope/crm/faq/search', [FAQController::class, 'search'])

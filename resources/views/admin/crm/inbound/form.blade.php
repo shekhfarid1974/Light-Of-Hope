@@ -65,7 +65,7 @@
             </div>
         @endif
 
-        <form action="{{ route('crm.store', ['type' => $type]) }}" method="POST" id="crmForm">
+        <form action="{{ route('crm.inbound.store') }}" method="POST" id="crmForm">
             @csrf
 
             {{-- Hidden fields from URL --}}
@@ -76,27 +76,31 @@
             SECTION 1 — Consumer Information
             ════════════════════════════════════════ --}}
             <h6 class="fw-bold mb-3 pb-1" style="color:#2563eb; border-bottom:2px solid #2563eb;">
-                Consumer Information (Teachers Training)
+                Consumer Information (Combined Inbound)
             </h6>
 
             <div class="row g-3 mb-4">
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">
-                        Trainee Name <span class="text-danger">*</span>
+                        Parent's Name <span class="text-danger">*</span>
                     </label>
-                    <input type="text" name="trainee_name"
-                        class="form-control form-control-sm @error('trainee_name') is-invalid @enderror"
-                        value="{{ old('trainee_name') }}">
-                    @error('trainee_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    <input type="text" name="parents_name"
+                        class="form-control form-control-sm @error('parents_name') is-invalid @enderror"
+                        value="{{ old('parents_name') }}">
+                    @error('parents_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">
-                        Experience
+                        Child's Gender
                     </label>
-                    <input type="text" name="experience" class="form-control form-control-sm"
-                        value="{{ old('experience') }}" placeholder="e.g. 5 Years">
+                    <select name="child_gender" class="form-select form-select-sm">
+                        <option value="">-- Select Gender --</option>
+                        <option value="Male" {{ old('child_gender') == 'Male' ? 'selected' : '' }}>Male</option>
+                        <option value="Female" {{ old('child_gender') == 'Female' ? 'selected' : '' }}>Female</option>
+                        <option value="Other" {{ old('child_gender') == 'Other' ? 'selected' : '' }}>Other</option>
+                    </select>
                 </div>
 
                 <div class="col-md-4">
@@ -133,9 +137,41 @@
                 </div>
 
                 <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Child's Name</label>
+                    <input type="text" name="child_name" class="form-control form-control-sm"
+                        value="{{ old('child_name') }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Child's Age</label>
+                    <input type="text" name="child_age" class="form-control form-control-sm" value="{{ old('child_age') }}"
+                        placeholder="e.g. 8 years">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Class</label>
+                    <input type="text" name="class" class="form-control form-control-sm" value="{{ old('class') }}"
+                        placeholder="e.g. Grade 3">
+                </div>
+                
+                <hr class="w-100 my-3">
+                
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Trainee Name (If Teachers Training)</label>
+                    <input type="text" name="trainee_name" class="form-control form-control-sm"
+                        value="{{ old('trainee_name') }}">
+                </div>
+
+                <div class="col-md-4">
                     <label class="form-label small fw-semibold">Trainee Age</label>
                     <input type="text" name="trainee_age" class="form-control form-control-sm" value="{{ old('trainee_age') }}"
                         placeholder="e.g. 25 years">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Experience</label>
+                    <input type="text" name="experience" class="form-control form-control-sm" value="{{ old('experience') }}"
+                        placeholder="e.g. 5 Years">
                 </div>
 
                 <div class="col-md-4">
@@ -230,6 +266,16 @@
                         @endforeach
                     </select>
                 </div>
+                
+                <div class="col-md-2">
+                    <label class="form-label small fw-semibold">Call Back Date</label>
+                    <input type="date" name="call_back_date" class="form-control form-control-sm" value="{{ old('call_back_date') }}">
+                </div>
+
+                <div class="col-md-2">
+                    <label class="form-label small fw-semibold">Call Back Time</label>
+                    <input type="time" name="call_back_time" class="form-control form-control-sm" value="{{ old('call_back_time') }}">
+                </div>
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Assigned Person</label>
@@ -245,10 +291,10 @@
 
                 <div class="col-12">
                     <label class="form-label small fw-semibold">
-                        Query & Complaint <span class="text-danger">*</span>
+                        Remarks / Query & Complaint <span class="text-danger">*</span>
                     </label>
-                    <textarea name="query_complaint" class="form-control form-control-sm" rows="3"
-                        placeholder="Query or complaint details...">{{ old('query_complaint') }}</textarea>
+                    <textarea name="remarks" class="form-control form-control-sm" rows="3"
+                        placeholder="Customer conversation notes, query or complaint details...">{{ old('remarks') }}</textarea>
                 </div>
 
             </div>
@@ -405,7 +451,7 @@
                 $('#historyLoader').show();
                 $('#historyBody').html('');
 
-                $.getJSON("{{ route('crm.history') }}", { phone: phone }, function (records) {
+                $.getJSON("{{ route('crm.inbound.history') }}", { phone: phone }, function (records) {
                     $('#historyLoader').hide();
                     allRecords = records;
                     currentPage = 0;

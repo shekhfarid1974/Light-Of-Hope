@@ -16,6 +16,7 @@ class CrmOptionController extends Controller
             'query_source' => 'Query Source',
             'query_status' => 'Query Status',
             'assigned_person' => 'Assigned Person',
+            'call_back' => 'Call Back',
         ];
 
         $currentType = $request->get('type', 'interested_for');

@@ -13,6 +13,7 @@
             <thead class="table-light">
                 <tr>
                     <th>Source (CRM)</th>
+                    <th>Name</th>
                     <th>Number</th>
                     <th>Remarks / Query</th>
                     <th>Date</th>
@@ -20,20 +21,23 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($crms as $crm)
+                @foreach($callBacks as $cb)
                 @php
-                    $crmTypeFormatted = match($crm->crm_type) {
+                    $crmType = $cb->crm ? $cb->crm->crm_type : 'Unknown';
+                    $crmTypeFormatted = match($crmType) {
                         'teachers_training' => 'Teachers Training',
                         'inbound' => 'Inbound',
-                        default => 'Course Outbound',
+                        'course_outbound' => 'Course Outbound',
+                        default => 'Unknown',
                     };
                 @endphp
                 <tr>
                     <td><span class="badge bg-secondary">{{ $crmTypeFormatted }}</span></td>
-                    <td>{{ $crm->phone }}</td>
-                    <td>{{ $crm->remarks ?? $crm->query_complaint }}</td>
-                    <td>{{ $crm->created_at->format('d M Y') }}</td>
-                    <td>{{ $crm->created_at->format('h:i A') }}</td>
+                    <td>{{ $cb->name }}</td>
+                    <td>{{ $cb->crm->phone ?? '—' }}</td>
+                    <td>{{ $cb->remarks }}</td>
+                    <td>{{ $cb->date ? \Carbon\Carbon::parse($cb->date)->format('d M Y') : '—' }}</td>
+                    <td>{{ $cb->time ? \Carbon\Carbon::parse($cb->time)->format('h:i A') : '—' }}</td>
                 </tr>
                 @endforeach
             </tbody>

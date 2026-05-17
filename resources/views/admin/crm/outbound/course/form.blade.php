@@ -65,7 +65,7 @@
             </div>
         @endif
 
-        <form action="{{ route('crm.store', ['type' => $type]) }}" method="POST" id="crmForm">
+        <form action="{{ route('crm.course_outbound.store') }}" method="POST" id="crmForm">
             @csrf
 
             {{-- Hidden fields from URL --}}
@@ -76,7 +76,7 @@
             SECTION 1 — Consumer Information
             ════════════════════════════════════════ --}}
             <h6 class="fw-bold mb-3 pb-1" style="color:#2563eb; border-bottom:2px solid #2563eb;">
-                Consumer Information (Combined Inbound)
+                Consumer Information (Course)
             </h6>
 
             <div class="row g-3 mb-4">
@@ -152,32 +152,6 @@
                     <label class="form-label small fw-semibold">Class</label>
                     <input type="text" name="class" class="form-control form-control-sm" value="{{ old('class') }}"
                         placeholder="e.g. Grade 3">
-                </div>
-                
-                <hr class="w-100 my-3">
-                
-                <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Trainee Name (If Teachers Training)</label>
-                    <input type="text" name="trainee_name" class="form-control form-control-sm"
-                        value="{{ old('trainee_name') }}">
-                </div>
-
-                <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Trainee Age</label>
-                    <input type="text" name="trainee_age" class="form-control form-control-sm" value="{{ old('trainee_age') }}"
-                        placeholder="e.g. 25 years">
-                </div>
-
-                <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Experience</label>
-                    <input type="text" name="experience" class="form-control form-control-sm" value="{{ old('experience') }}"
-                        placeholder="e.g. 5 Years">
-                </div>
-
-                <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Course Title</label>
-                    <input type="text" name="course_title" class="form-control form-control-sm" value="{{ old('course_title') }}"
-                        placeholder="e.g. Graphic Design">
                 </div>
 
             </div>
@@ -266,6 +240,16 @@
                         @endforeach
                     </select>
                 </div>
+                
+                <div class="col-md-2">
+                    <label class="form-label small fw-semibold">Call Back Date</label>
+                    <input type="date" name="call_back_date" class="form-control form-control-sm" value="{{ old('call_back_date') }}">
+                </div>
+
+                <div class="col-md-2">
+                    <label class="form-label small fw-semibold">Call Back Time</label>
+                    <input type="time" name="call_back_time" class="form-control form-control-sm" value="{{ old('call_back_time') }}">
+                </div>
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Assigned Person</label>
@@ -281,10 +265,10 @@
 
                 <div class="col-12">
                     <label class="form-label small fw-semibold">
-                        Remarks / Query & Complaint <span class="text-danger">*</span>
+                        Remarks <span class="text-danger">*</span>
                     </label>
                     <textarea name="remarks" class="form-control form-control-sm" rows="3"
-                        placeholder="Customer conversation notes, query or complaint details...">{{ old('remarks') }}</textarea>
+                        placeholder="Customer conversation notes...">{{ old('remarks') }}</textarea>
                 </div>
 
             </div>
@@ -441,7 +425,7 @@
                 $('#historyLoader').show();
                 $('#historyBody').html('');
 
-                $.getJSON("{{ route('crm.history') }}", { phone: phone }, function (records) {
+                $.getJSON("{{ route('crm.course_outbound.history') }}", { phone: phone }, function (records) {
                     $('#historyLoader').hide();
                     allRecords = records;
                     currentPage = 0;

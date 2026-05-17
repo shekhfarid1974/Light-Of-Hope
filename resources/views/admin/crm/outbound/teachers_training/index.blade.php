@@ -7,7 +7,7 @@
     <div class="card-box">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h6 class="fw-bold mb-0"><i class="bi bi-table"></i> Teachers Training CRM Records</h6>
-            <a href="{{ route('crm.form', ['type' => $type]) }}?phone_number=&agent={{ urlencode(auth()->user()->name) }}&campaign="
+            <a href="{{ route('crm.teachers_training.form') }}?phone_number=&agent={{ urlencode(auth()->user()->name) }}&campaign="
                 target="_blank" class="btn btn-primary btn-sm">
                 <i class="bi bi-plus-circle"></i> Add New
             </a>
@@ -27,12 +27,18 @@
                         <th>#</th>
                         <th>Trainee Name</th>
                         <th>Phone</th>
+                        <th>Email</th>
+                        <th>Profession</th>
                         <th>District</th>
                         <th>Age</th>
                         <th>Experience</th>
                         <th>Course Title</th>
+                        <th>Calling Status</th>
+                        <th>Query Source</th>
                         <th>Query Status</th>
+                        <th>Call Back</th>
                         <th>Assigned Person</th>
+                        <th>Query Complaint</th>
                         <th>Agent</th>
                         <th>Data Source</th>
                         <th>Date</th>
@@ -44,17 +50,38 @@
                             <td>{{ $i + 1 }}</td>
                             <td>
                                 <strong>{{ $crm->trainee_name }}</strong>
-                                @if($crm->email)
-                                    <br><small class="text-muted">{{ $crm->email }}</small>
-                                @endif
                             </td>
                             <td>{{ $crm->phone }}</td>
+                            <td>{{ $crm->email ?? '—' }}</td>
+                            <td>{{ $crm->profession ?? '—' }}</td>
                             <td>{{ $crm->district->name ?? '—' }}</td>
                             <td>{{ $crm->trainee_age ?? '—' }}</td>
                             <td>{{ $crm->experience ?? '—' }}</td>
                             <td>
                                 @if($crm->course_title)
                                     <span class="badge bg-primary">{{ $crm->course_title }}</span>
+                                @else —
+                                @endif
+                            </td>
+                            <td>
+                                @php
+                                    $statusColor = [
+                                        'Enrolled' => 'success',
+                                        'Trial Class' => 'info',
+                                        'Pending' => 'warning',
+                                        'Cancel' => 'danger',
+                                        'No Interaction' => 'secondary',
+                                        'No Communication' => 'dark',
+                                    ][$crm->calling_status] ?? 'secondary';
+                                @endphp
+                                @if($crm->calling_status)
+                                    <span class="badge bg-{{ $statusColor }}">{{ $crm->calling_status }}</span>
+                                @else —
+                                @endif
+                            </td>
+                            <td>
+                                @if($crm->query_source)
+                                    <span class="badge bg-info text-dark">{{ $crm->query_source }}</span>
                                 @else —
                                 @endif
                             </td>
@@ -67,7 +94,9 @@
                                 @else —
                                 @endif
                             </td>
+                            <td>{{ $crm->call_back ?? '—' }}</td>
                             <td>{{ $crm->assigned_person ?? '—' }}</td>
+                            <td>{{ $crm->query_complaint ?? '—' }}</td>
                             <td>{{ $crm->agent ?? '—' }}</td>
                             <td><span class="badge bg-light text-dark border">{{ $crm->dataSource->name ?? '—' }}</span></td>
                             <td>{{ $crm->created_at->format('d M Y') }}</td>

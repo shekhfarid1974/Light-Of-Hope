@@ -7,7 +7,7 @@
     <div class="card-box">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h6 class="fw-bold mb-0"><i class="bi bi-table"></i> Combined Inbound CRM Records</h6>
-            <a href="{{ route('crm.form', ['type' => $type]) }}?phone_number=&agent={{ urlencode(auth()->user()->name) }}&campaign="
+            <a href="{{ route('crm.inbound.form') }}?phone_number=&agent={{ urlencode(auth()->user()->name) }}&campaign="
                 target="_blank" class="btn btn-primary btn-sm">
                 <i class="bi bi-plus-circle"></i> Add New
             </a>
@@ -28,13 +28,22 @@
                         <th>Caller Name</th>
                         <th>Trainee Name</th>
                         <th>Phone</th>
+                        <th>Email</th>
+                        <th>Profession</th>
                         <th>District</th>
-                        <th>Child</th>
+                        <th>Child Name</th>
+                        <th>Child Age</th>
+                        <th>Child Gender</th>
+                        <th>Class</th>
+                        <th>Trainee Age</th>
+                        <th>Experience</th>
                         <th>Course/Interested</th>
                         <th>Calling Status</th>
                         <th>Query Source</th>
                         <th>Query Status</th>
+                        <th>Call Back</th>
                         <th>Assigned Person</th>
+                        <th>Remarks</th>
                         <th>Agent</th>
                         <th>Data Source</th>
                         <th>Date</th>
@@ -46,23 +55,18 @@
                             <td>{{ $i + 1 }}</td>
                             <td>
                                 <strong>{{ $crm->parents_name }}</strong>
-                                @if($crm->email)
-                                    <br><small class="text-muted">{{ $crm->email }}</small>
-                                @endif
                             </td>
                             <td>{{ $crm->trainee_name ?? '—' }}</td>
                             <td>{{ $crm->phone }}</td>
+                            <td>{{ $crm->email ?? '—' }}</td>
+                            <td>{{ $crm->profession ?? '—' }}</td>
                             <td>{{ $crm->district->name ?? '—' }}</td>
-                            <td>
-                                @if($crm->child_name)
-                                    {{ $crm->child_name }}
-                                    @if($crm->child_age)
-                                        <span class="badge bg-secondary">{{ $crm->child_age }}</span>
-                                    @endif
-                                @else
-                                    —
-                                @endif
-                            </td>
+                            <td>{{ $crm->child_name ?? '—' }}</td>
+                            <td>{{ $crm->child_age ?? '—' }}</td>
+                            <td>{{ $crm->child_gender ?? '—' }}</td>
+                            <td>{{ $crm->class ?? '—' }}</td>
+                            <td>{{ $crm->trainee_age ?? '—' }}</td>
+                            <td>{{ $crm->experience ?? '—' }}</td>
                             <td>
                                 @if($crm->interested_for)
                                     <span class="badge bg-primary">{{ $crm->interested_for }}</span>
@@ -102,7 +106,9 @@
                                 @else —
                                 @endif
                             </td>
+                            <td>{{ $crm->call_back ?? '—' }}</td>
                             <td>{{ $crm->assigned_person ?? '—' }}</td>
+                            <td>{{ $crm->remarks ?? '—' }}</td>
                             <td>{{ $crm->agent ?? '—' }}</td>
                             <td><span class="badge bg-light text-dark border">{{ $crm->dataSource->name ?? '—' }}</span></td>
                             <td>{{ $crm->created_at->format('d M Y') }}</td>
