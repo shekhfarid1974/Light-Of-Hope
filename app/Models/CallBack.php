@@ -9,10 +9,10 @@ class CallBack extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['crm_id', 'name', 'date', 'time', 'remarks'];
+    protected $fillable = ['crm_id', 'crm_type', 'name', 'date', 'time', 'remarks'];
 
     public function crm()
     {
-        return $this->belongsTo(CRM::class, 'crm_id');
+        return $this->morphTo();
     }
 }

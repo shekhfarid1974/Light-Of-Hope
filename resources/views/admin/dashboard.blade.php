@@ -11,7 +11,7 @@
                 </div>
                 <div>
                     <div class="text-muted small">Total CRM Records</div>
-                    <div class="fw-bold fs-4">{{ \App\Models\CRM::count() }}</div>
+                    <div class="fw-bold fs-4">{{ $totalCrms }}</div>
                 </div>
             </div>
         </div>
@@ -56,10 +56,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(\App\Models\CRM::with(['district', 'dataSource'])->latest()->take(10)->get() as $i => $crm)
+                @foreach($crms->take(10) as $i => $crm)
                     <tr>
                         <td>{{ $i + 1 }}</td>
-                        <td>{{ $crm->parents_name }}</td>
+                        <td>{{ $crm->parents_name ?? $crm->trainee_name ?? '—' }}</td>
                         <td>{{ $crm->phone }}</td>
                         <td>{{ $crm->district->name ?? '—' }}</td>
                         <td>{{ $crm->dataSource->name ?? '—' }}</td>

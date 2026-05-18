@@ -11,8 +11,18 @@ class District extends Model
 
     protected $fillable = ['name'];
 
-    public function crms()
+    public function inboundCrms()
     {
-        return $this->hasMany(CRM::class);
+        return $this->hasMany(InboundCrm::class);
+    }
+
+    public function courseOutboundCrms()
+    {
+        return $this->hasMany(CourseOutboundCrm::class);
+    }
+
+    public function teachersTrainingCrms()
+    {
+        return $this->hasMany(TeachersTrainingCrm::class);
     }
 }

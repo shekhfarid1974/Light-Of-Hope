@@ -36,11 +36,12 @@ class CrmService
 
         if (!empty($data['call_back'])) {
             \App\Models\CallBack::create([
-                'crm_id'  => $crm->id,
-                'name'    => $crm->parents_name ?? $crm->trainee_name ?? '—',
-                'date'    => $data['call_back_date'] ?? null,
-                'time'    => $data['call_back_time'] ?? null,
-                'remarks' => $crm->remarks ?? $crm->query_complaint,
+                'crm_id'   => $crm->id,
+                'crm_type' => get_class($crm),
+                'name'     => $crm->parents_name ?? $crm->trainee_name ?? '—',
+                'date'     => $data['call_back_date'] ?? null,
+                'time'     => $data['call_back_time'] ?? null,
+                'remarks'  => $crm->remarks ?? $crm->query_complaint,
             ]);
         }
 
@@ -54,10 +55,10 @@ class CrmService
         return $records->map(function ($r) {
             return [
                 'id' => $r->id,
-                'parents_name' => $r->parents_name,
+                'parents_name' => $r->parents_name ?? $r->trainee_name ?? '—',
                 'phone' => $r->phone,
                 'district' => $r->district ? $r->district->name : '—',
-                'interested_for' => $r->interested_for,
+                'interested_for' => $r->interested_for ?? '—',
                 'calling_status' => $r->calling_status,
                 'query_source' => $r->query_source,
                 'query_status' => $r->query_status,

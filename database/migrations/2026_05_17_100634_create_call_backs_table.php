@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('call_backs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('crm_id')->nullable()->constrained('crms')->onDelete('cascade');
+            $table->unsignedBigInteger('crm_id')->nullable();
+            $table->string('crm_type')->nullable();
             $table->string('name')->nullable();
             $table->date('date')->nullable();
             $table->time('time')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
+            
+            $table->index(['crm_id', 'crm_type']);
         });
     }
 
