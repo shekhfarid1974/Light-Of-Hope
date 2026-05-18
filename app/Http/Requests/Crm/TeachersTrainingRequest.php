@@ -14,17 +14,17 @@ class TeachersTrainingRequest extends FormRequest
     public function rules()
     {
         return [
-            'trainee_name'   => 'required|string|max:255',
-            'phone'          => 'required|string|max:20',
-            'email'          => 'nullable|email|max:255',
+            'trainee_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'nullable|email|max:255',
             'data_source_id' => 'required|exists:data_sources,id',
-            'district_id'    => 'nullable|exists:districts,id',
-            
+            'district_id' => 'nullable|exists:districts,id',
+
             'profession' => 'nullable|string|max:255',
             'experience' => 'nullable|string|max:255',
             'trainee_age' => 'nullable|string|max:255',
             'course_title' => 'nullable|string|max:255',
-            
+
             'assigned_person' => 'nullable|string|max:255',
             'query_complaint' => 'required|string',
             'agent' => 'nullable|string|max:255',

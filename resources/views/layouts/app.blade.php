@@ -136,34 +136,41 @@
         </a>
 
         <div class="nav-section">Course Outbound CRM</div>
-        <a href="{{ route('crm.course_outbound.form') }}?phone_number=&agent=" target="_blank" class="{{ request()->routeIs('crm.course_outbound.form') ? 'active' : '' }}">
+        <a href="{{ route('crm.course_outbound.form') }}?phone_number=&agent=" target="_blank"
+            class="{{ request()->routeIs('crm.course_outbound.form') ? 'active' : '' }}">
             <i class="bi bi-plus-circle me-2"></i> Course Form
             <i class="bi bi-box-arrow-up-right ms-1" style="font-size:.7rem;opacity:.6;"></i>
         </a>
-        <a href="{{ route('crm.course_outbound.index') }}" class="{{ request()->routeIs('crm.course_outbound.index') ? 'active' : '' }}">
+        <a href="{{ route('crm.course_outbound.index') }}"
+            class="{{ request()->routeIs('crm.course_outbound.index') ? 'active' : '' }}">
             <i class="bi bi-table me-2"></i> Course Report
         </a>
 
         <div class="nav-section">Teachers Training CRM</div>
-        <a href="{{ route('crm.teachers_training.form') }}?phone_number=&agent=" target="_blank" class="{{ request()->routeIs('crm.teachers_training.form') ? 'active' : '' }}">
+        <a href="{{ route('crm.teachers_training.form') }}?phone_number=&agent=" target="_blank"
+            class="{{ request()->routeIs('crm.teachers_training.form') ? 'active' : '' }}">
             <i class="bi bi-plus-circle me-2"></i> Teachers Form
             <i class="bi bi-box-arrow-up-right ms-1" style="font-size:.7rem;opacity:.6;"></i>
         </a>
-        <a href="{{ route('crm.teachers_training.index') }}" class="{{ request()->routeIs('crm.teachers_training.index') ? 'active' : '' }}">
+        <a href="{{ route('crm.teachers_training.index') }}"
+            class="{{ request()->routeIs('crm.teachers_training.index') ? 'active' : '' }}">
             <i class="bi bi-table me-2"></i> Teachers Report
         </a>
 
         <div class="nav-section">Inbound CRM</div>
-        <a href="{{ route('crm.inbound.form') }}?phone_number=&agent=" target="_blank" class="{{ request()->routeIs('crm.inbound.form') ? 'active' : '' }}">
+        <a href="{{ route('crm.inbound.form') }}?phone_number=&agent=" target="_blank"
+            class="{{ request()->routeIs('crm.inbound.form') ? 'active' : '' }}">
             <i class="bi bi-plus-circle me-2"></i> Inbound Form
             <i class="bi bi-box-arrow-up-right ms-1" style="font-size:.7rem;opacity:.6;"></i>
         </a>
-        <a href="{{ route('crm.inbound.index') }}" class="{{ request()->routeIs('crm.inbound.index') ? 'active' : '' }}">
+        <a href="{{ route('crm.inbound.index') }}"
+            class="{{ request()->routeIs('crm.inbound.index') ? 'active' : '' }}">
             <i class="bi bi-table me-2"></i> Inbound Report
         </a>
 
         <div class="nav-section">Combined Report</div>
-        <a href="{{ route('crm.callback.report') }}" class="{{ request()->routeIs('crm.callback.report') ? 'active' : '' }}">
+        <a href="{{ route('crm.callback.report') }}"
+            class="{{ request()->routeIs('crm.callback.report') ? 'active' : '' }}">
             <i class="bi bi-telephone-inbound me-2"></i> Call Back Report
         </a>
 
