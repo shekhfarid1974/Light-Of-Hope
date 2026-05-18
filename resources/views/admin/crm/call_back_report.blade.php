@@ -16,8 +16,7 @@
                     <th>Name</th>
                     <th>Number</th>
                     <th>Remarks / Query</th>
-                    <th>Calling Status</th>
-                    <th>Query Status</th>
+                    <th>Call Back Status</th>
                     <th>Date</th>
                     <th>Time</th>
                 </tr>
@@ -39,33 +38,8 @@
                     <td>{{ $cb->crm->phone ?? '—' }}</td>
                     <td>{{ $cb->remarks }}</td>
                     <td>
-                        @if($cb->crm && $cb->crm->calling_status)
-                            @php
-                                $statusColor = [
-                                    'Enrolled' => 'success',
-                                    'Trial Class' => 'info',
-                                    'Pending' => 'warning',
-                                    'Cancel' => 'danger',
-                                    'No Interaction' => 'secondary',
-                                    'No Communication' => 'dark'
-                                ][$cb->crm->calling_status] ?? 'secondary';
-                            @endphp
-                            <span class="badge bg-{{ $statusColor }}">{{ $cb->crm->calling_status }}</span>
-                        @else
-                            —
-                        @endif
-                    </td>
-                    <td>
-                        @if($cb->crm && $cb->crm->query_status)
-                            @php
-                                $qColor = [
-                                    'Done' => 'success',
-                                    'Pending' => 'warning',
-                                    'Cancel' => 'danger',
-                                    'No Interaction' => 'secondary'
-                                ][$cb->crm->query_status] ?? 'secondary';
-                            @endphp
-                            <span class="badge bg-{{ $qColor }}">{{ $cb->crm->query_status }}</span>
+                        @if($cb->crm && $cb->crm->call_back)
+                            <span class="badge bg-info text-dark">{{ $cb->crm->call_back }}</span>
                         @else
                             —
                         @endif
