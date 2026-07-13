@@ -157,17 +157,6 @@
             <i class="bi bi-table me-2"></i> Teachers Report
         </a>
 
-        <div class="nav-section">Inbound CRM</div>
-        <a href="{{ route('crm.inbound.form') }}?phone_number=&agent=" target="_blank"
-            class="{{ request()->routeIs('crm.inbound.form') ? 'active' : '' }}">
-            <i class="bi bi-plus-circle me-2"></i> Inbound Form
-            <i class="bi bi-box-arrow-up-right ms-1" style="font-size:.7rem;opacity:.6;"></i>
-        </a>
-        <a href="{{ route('crm.inbound.index') }}"
-            class="{{ request()->routeIs('crm.inbound.index') ? 'active' : '' }}">
-            <i class="bi bi-table me-2"></i> Inbound Report
-        </a>
-
         <div class="nav-section">Combined Report</div>
         <a href="{{ route('crm.callback.report') }}"
             class="{{ request()->routeIs('crm.callback.report') ? 'active' : '' }}">

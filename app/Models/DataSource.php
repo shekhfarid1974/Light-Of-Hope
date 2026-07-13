@@ -11,11 +11,6 @@ class DataSource extends Model
 
     protected $fillable = ['name'];
 
-    public function inboundCrms()
-    {
-        return $this->hasMany(InboundCrm::class);
-    }
-
     public function courseOutboundCrms()
     {
         return $this->hasMany(CourseOutboundCrm::class);
