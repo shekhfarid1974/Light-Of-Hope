@@ -135,25 +135,25 @@
             <i class="bi bi-speedometer2 me-2"></i> Dashboard
         </a>
 
-        <div class="nav-section">Course Outbound CRM</div>
-        <a href="{{ route('crm.course_outbound.form') }}?phone_number=&agent=" target="_blank"
-            class="{{ request()->routeIs('crm.course_outbound.form') ? 'active' : '' }}">
-            <i class="bi bi-plus-circle me-2"></i> Course Form
+        <div class="nav-section">Kids CRM</div>
+        <a href="{{ route('crm.kids_crm.form') }}?phone_number=&agent=" target="_blank"
+            class="{{ request()->routeIs('crm.kids_crm.form') ? 'active' : '' }}">
+            <i class="bi bi-plus-circle me-2"></i> Kids Form
             <i class="bi bi-box-arrow-up-right ms-1" style="font-size:.7rem;opacity:.6;"></i>
         </a>
-        <a href="{{ route('crm.course_outbound.index') }}"
-            class="{{ request()->routeIs('crm.course_outbound.index') ? 'active' : '' }}">
-            <i class="bi bi-table me-2"></i> Course Report
+        <a href="{{ route('crm.kids_crm.index') }}"
+            class="{{ request()->routeIs('crm.kids_crm.index') ? 'active' : '' }}">
+            <i class="bi bi-table me-2"></i> Kids Report
         </a>
 
-        <div class="nav-section">Teachers Training CRM</div>
-        <a href="{{ route('crm.teachers_training.form') }}?phone_number=&agent=" target="_blank"
-            class="{{ request()->routeIs('crm.teachers_training.form') ? 'active' : '' }}">
+        <div class="nav-section">Teachers CRM</div>
+        <a href="{{ route('crm.teachers_crm.form') }}?phone_number=&agent=" target="_blank"
+            class="{{ request()->routeIs('crm.teachers_crm.form') ? 'active' : '' }}">
             <i class="bi bi-plus-circle me-2"></i> Teachers Form
             <i class="bi bi-box-arrow-up-right ms-1" style="font-size:.7rem;opacity:.6;"></i>
         </a>
-        <a href="{{ route('crm.teachers_training.index') }}"
-            class="{{ request()->routeIs('crm.teachers_training.index') ? 'active' : '' }}">
+        <a href="{{ route('crm.teachers_crm.index') }}"
+            class="{{ request()->routeIs('crm.teachers_crm.index') ? 'active' : '' }}">
             <i class="bi bi-table me-2"></i> Teachers Report
         </a>
 

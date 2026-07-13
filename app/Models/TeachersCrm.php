@@ -5,30 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CourseOutboundCrm extends Model
+class TeachersCrm extends Model
 {
     use HasFactory;
 
-    protected $table = 'course_outbound_crms';
+    protected $table = 'teachers_crms';
 
     protected $fillable = [
-        'parents_name',
+        'trainee_name',
         'phone',
         'email',
-        'profession',
-        'district_id',
-        'child_gender',
-        'child_age',
-        'child_name',
-        'class',
-        'interested_for',
         'data_source_id',
+        'district_id',
+        'profession',
+        'experience',
+        'trainee_age',
+        'course_title',
         'calling_status',
         'query_source',
         'query_status',
         'call_back',
         'assigned_person',
-        'remarks',
+        'query_complaint',
         'agent',
     ];
 
