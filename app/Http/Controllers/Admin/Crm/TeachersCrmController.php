@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Crm\Outbound;
+namespace App\Http\Controllers\Admin\Crm;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Crm\TeachersTrainingRequest;
+use App\Http\Requests\Crm\TeachersCrmRequest;
 use App\Models\District;
 use App\Models\DataSource;
 use App\Models\CrmOption;
 use App\Services\CrmService;
 use Illuminate\Http\Request;
 
-class TeachersTrainingController extends Controller
+class TeachersCrmController extends Controller
 {
     protected $crmService;
 
@@ -32,7 +32,7 @@ class TeachersTrainingController extends Controller
         $assignedPersonOptions = $options->get('assigned_person', collect());
         $callBackOptions = $options->get('call_back', collect());
 
-        return view('admin.crm.outbound.teachers_training.form', compact(
+        return view('admin.crm.teachers_crm.form', compact(
             'districts', 
             'dataSources', 
             'interestedForOptions', 
@@ -44,21 +44,21 @@ class TeachersTrainingController extends Controller
         ));
     }
 
-    public function store(TeachersTrainingRequest $request)
+    public function store(TeachersCrmRequest $request)
     {
         $data = $request->validated();
-        $data['crm_type'] = 'teachers_training';
+        $data['crm_type'] = 'teachers_crm';
 
         $this->crmService->createCrm($data);
 
-        return redirect()->route('crm.teachers_training.form')
-            ->with('success', 'Teachers Training CRM record saved successfully.');
+        return redirect()->route('crm.teachers_crm.form')
+            ->with('success', 'Teachers CRM record saved successfully.');
     }
 
     public function index()
     {
-        $crms = $this->crmService->getAllCrms('teachers_training');
-        return view('admin.crm.outbound.teachers_training.index', compact('crms'));
+        $crms = $this->crmService->getAllCrms('teachers_crm');
+        return view('admin.crm.teachers_crm.index', compact('crms'));
     }
 
     public function history(Request $request)

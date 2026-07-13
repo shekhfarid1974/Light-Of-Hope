@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Crm\Outbound;
+namespace App\Http\Controllers\Admin\Crm;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Crm\CourseOutboundRequest;
+use App\Http\Requests\Crm\KidsCrmRequest;
 use App\Models\District;
 use App\Models\DataSource;
 use App\Models\CrmOption;
 use App\Services\CrmService;
 use Illuminate\Http\Request;
 
-class CourseOutboundController extends Controller
+class KidsCrmController extends Controller
 {
     protected $crmService;
 
@@ -32,7 +32,7 @@ class CourseOutboundController extends Controller
         $assignedPersonOptions = $options->get('assigned_person', collect());
         $callBackOptions = $options->get('call_back', collect());
 
-        return view('admin.crm.outbound.course.form', compact(
+        return view('admin.crm.kids_crm.form', compact(
             'districts', 
             'dataSources', 
             'interestedForOptions', 
@@ -44,21 +44,21 @@ class CourseOutboundController extends Controller
         ));
     }
 
-    public function store(CourseOutboundRequest $request)
+    public function store(KidsCrmRequest $request)
     {
         $data = $request->validated();
         $data['crm_type'] = 'course_outbound';
 
         $this->crmService->createCrm($data);
 
-        return redirect()->route('crm.course_outbound.form')
+        return redirect()->route('crm.kids_crm.form')
             ->with('success', 'Course Outbound CRM record saved successfully.');
     }
 
     public function index()
     {
         $crms = $this->crmService->getAllCrms('course_outbound');
-        return view('admin.crm.outbound.course.index', compact('crms'));
+        return view('admin.crm.kids_crm.index', compact('crms'));
     }
 
     public function history(Request $request)
