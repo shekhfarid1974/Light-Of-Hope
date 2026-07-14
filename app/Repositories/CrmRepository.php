@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\CourseOutboundCrm;
-use App\Models\TeachersTrainingCrm;
+use App\Models\KidsCrm;
+use App\Models\TeachersCrm;
 use App\Models\CallBack;
 use App\Repositories\Contracts\CrmRepositoryInterface;
 
@@ -11,18 +11,18 @@ class CrmRepository implements CrmRepositoryInterface
 {
     public function getAll(string $type = null)
     {
-        if ($type === 'course_outbound') {
-            return CourseOutboundCrm::with(['district', 'dataSource'])->latest()->get();
-        } elseif ($type === 'teachers_training') {
-            return TeachersTrainingCrm::with(['district', 'dataSource'])->latest()->get();
+        if ($type === 'kids_crm') {
+            return KidsCrm::with(['district', 'dataSource'])->latest()->get();
+        } elseif ($type === 'teachers_crm') {
+            return TeachersCrm::with(['district', 'dataSource'])->latest()->get();
         }
 
-        $course = CourseOutboundCrm::with(['district', 'dataSource'])->latest()->get()->map(function($item) {
-            $item->crm_type = 'course_outbound';
+        $course = KidsCrm::with(['district', 'dataSource'])->latest()->get()->map(function($item) {
+            $item->crm_type = 'kids_crm';
             return $item;
         });
-        $teachers = TeachersTrainingCrm::with(['district', 'dataSource'])->latest()->get()->map(function($item) {
-            $item->crm_type = 'teachers_training';
+        $teachers = TeachersCrm::with(['district', 'dataSource'])->latest()->get()->map(function($item) {
+            $item->crm_type = 'teachers_crm';
             return $item;
         });
 
@@ -31,12 +31,12 @@ class CrmRepository implements CrmRepositoryInterface
 
     public function getRecent(int $limit)
     {
-        $course = CourseOutboundCrm::with(['district', 'dataSource'])->latest()->take($limit)->get()->map(function($item) {
-            $item->crm_type = 'course_outbound';
+        $course = KidsCrm::with(['district', 'dataSource'])->latest()->take($limit)->get()->map(function($item) {
+            $item->crm_type = 'kids_crm';
             return $item;
         });
-        $teachers = TeachersTrainingCrm::with(['district', 'dataSource'])->latest()->take($limit)->get()->map(function($item) {
-            $item->crm_type = 'teachers_training';
+        $teachers = TeachersCrm::with(['district', 'dataSource'])->latest()->take($limit)->get()->map(function($item) {
+            $item->crm_type = 'teachers_crm';
             return $item;
         });
 
@@ -45,7 +45,7 @@ class CrmRepository implements CrmRepositoryInterface
 
     public function count()
     {
-        return CourseOutboundCrm::count() + TeachersTrainingCrm::count();
+        return KidsCrm::count() + TeachersCrm::count();
     }
 
     public function create(array $data)
@@ -54,20 +54,20 @@ class CrmRepository implements CrmRepositoryInterface
         unset($data['crm_type']);
 
         return match ($type) {
-            'course_outbound' => CourseOutboundCrm::create($data),
-            'teachers_training' => TeachersTrainingCrm::create($data),
+            'kids_crm' => KidsCrm::create($data),
+            'teachers_crm' => TeachersCrm::create($data),
             default => throw new \InvalidArgumentException("Invalid CRM type: {$type}"),
         };
     }
 
     public function getHistoryByPhone(string $phone)
     {
-        $course = CourseOutboundCrm::with(['district', 'dataSource'])->where('phone', $phone)->latest()->get()->map(function($item) {
-            $item->crm_type = 'course_outbound';
+        $course = KidsCrm::with(['district', 'dataSource'])->where('phone', $phone)->latest()->get()->map(function($item) {
+            $item->crm_type = 'kids_crm';
             return $item;
         });
-        $teachers = TeachersTrainingCrm::with(['district', 'dataSource'])->where('phone', $phone)->latest()->get()->map(function($item) {
-            $item->crm_type = 'teachers_training';
+        $teachers = TeachersCrm::with(['district', 'dataSource'])->where('phone', $phone)->latest()->get()->map(function($item) {
+            $item->crm_type = 'teachers_crm';
             return $item;
         });
 

@@ -47,17 +47,17 @@ class KidsCrmController extends Controller
     public function store(KidsCrmRequest $request)
     {
         $data = $request->validated();
-        $data['crm_type'] = 'course_outbound';
+        $data['crm_type'] = 'kids_crm';
 
         $this->crmService->createCrm($data);
 
         return redirect()->route('crm.kids_crm.form')
-            ->with('success', 'Course Outbound CRM record saved successfully.');
+            ->with('success', 'Kids CRM record saved successfully.');
     }
 
     public function index()
     {
-        $crms = $this->crmService->getAllCrms('course_outbound');
+        $crms = $this->crmService->getAllCrms('kids_crm');
         return view('admin.crm.kids_crm.index', compact('crms'));
     }
 

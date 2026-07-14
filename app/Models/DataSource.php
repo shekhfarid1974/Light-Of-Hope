@@ -11,13 +11,13 @@ class DataSource extends Model
 
     protected $fillable = ['name'];
 
-    public function courseOutboundCrms()
+    public function kidsCrms()
     {
-        return $this->hasMany(CourseOutboundCrm::class);
+        return $this->hasMany(KidsCrm::class);
     }
 
-    public function teachersTrainingCrms()
+    public function teachersCrms()
     {
-        return $this->hasMany(TeachersTrainingCrm::class);
+        return $this->hasMany(TeachersCrm::class);
     }
 }

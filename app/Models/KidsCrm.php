@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CourseCrm extends Model
+class KidsCrm extends Model
 {
     use HasFactory;
 
-    protected $table = 'course_crms';
+    protected $table = 'kids_crms';
 
     protected $fillable = [
         'parents_name',

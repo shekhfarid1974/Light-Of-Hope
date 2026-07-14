@@ -65,7 +65,7 @@
             </div>
         @endif
 
-        <form action="{{ route('crm.course_outbound.store') }}" method="POST" id="crmForm">
+        <form action="{{ route('crm.kids_crm.store') }}" method="POST" id="crmForm">
             @csrf
 
             {{-- Hidden fields from URL --}}
@@ -76,7 +76,7 @@
             SECTION 1 — Consumer Information
             ════════════════════════════════════════ --}}
             <h6 class="fw-bold mb-3 pb-1" style="color:#2563eb; border-bottom:2px solid #2563eb;">
-                Consumer Information (Course)
+                Consumer Information (Kids CRM)
             </h6>
 
             <div class="row g-3 mb-4">
@@ -425,7 +425,7 @@
                 $('#historyLoader').show();
                 $('#historyBody').html('');
 
-                $.getJSON("{{ route('crm.course_outbound.history') }}", { phone: phone }, function (records) {
+                $.getJSON("{{ route('crm.kids_crm.history') }}", { phone: phone }, function (records) {
                     $('#historyLoader').hide();
                     allRecords = records;
                     currentPage = 0;

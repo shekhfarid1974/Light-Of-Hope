@@ -6,8 +6,8 @@
 
     <div class="card-box">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h6 class="fw-bold mb-0"><i class="bi bi-table"></i> Course Outbound CRM Records</h6>
-            <a href="{{ route('crm.course_outbound.form') }}?phone_number=&agent={{ urlencode(auth()->user()->name) }}&campaign="
+            <h6 class="fw-bold mb-0"><i class="bi bi-table"></i> Kids CRM Records</h6>
+            <a href="{{ route('crm.kids_crm.form') }}?phone_number=&agent={{ urlencode(auth()->user()->name) }}&campaign="
                 target="_blank" class="btn btn-primary btn-sm">
                 <i class="bi bi-plus-circle"></i> Add New
             </a>

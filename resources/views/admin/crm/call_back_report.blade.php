@@ -26,8 +26,8 @@
                 @php
                     $crmType = $cb->crm_type;
                     $crmTypeFormatted = match($crmType) {
-                        \App\Models\TeachersTrainingCrm::class => 'Teachers Training',
-                        \App\Models\CourseOutboundCrm::class => 'Course Outbound',
+                        \App\Models\TeachersCrm::class => 'Teachers CRM',
+                        \App\Models\KidsCrm::class => 'Kids CRM',
                         default => 'Unknown',
                     };
                 @endphp
