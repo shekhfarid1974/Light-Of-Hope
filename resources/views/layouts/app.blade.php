@@ -138,7 +138,7 @@
         <div class="nav-section">Kids CRM</div>
         <a href="{{ route('crm.kids_crm.form') }}?phone_number=&agent=" target="_blank"
             class="{{ request()->routeIs('crm.kids_crm.form') ? 'active' : '' }}">
-            <i class="bi bi-plus-circle me-2"></i> Kids Form
+            <i class="bi bi-plus-circle me-2"></i> Kids CRM
             <i class="bi bi-box-arrow-up-right ms-1" style="font-size:.7rem;opacity:.6;"></i>
         </a>
         <a href="{{ route('crm.kids_crm.index') }}"
@@ -149,7 +149,7 @@
         <div class="nav-section">Teachers CRM</div>
         <a href="{{ route('crm.teachers_crm.form') }}?phone_number=&agent=" target="_blank"
             class="{{ request()->routeIs('crm.teachers_crm.form') ? 'active' : '' }}">
-            <i class="bi bi-plus-circle me-2"></i> Teachers Form
+            <i class="bi bi-plus-circle me-2"></i> Teachers CRM
             <i class="bi bi-box-arrow-up-right ms-1" style="font-size:.7rem;opacity:.6;"></i>
         </a>
         <a href="{{ route('crm.teachers_crm.index') }}"
