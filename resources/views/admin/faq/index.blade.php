@@ -20,6 +20,16 @@
                     @csrf
 
                     <div class="mb-3">
+                        <label class="form-label fw-semibold">CRM Type</label>
+                        <select name="crm_type" class="form-select @error('crm_type') is-invalid @enderror">
+                            <option value="">-- All / Both --</option>
+                            <option value="teachers_crm" {{ old('crm_type') == 'teachers_crm' ? 'selected' : '' }}>Teachers CRM</option>
+                            <option value="kids_crm" {{ old('crm_type') == 'kids_crm' ? 'selected' : '' }}>Kids CRM</option>
+                        </select>
+                        @error('crm_type') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="mb-3">
                         <label class="form-label fw-semibold">Title <span class="text-danger">*</span></label>
                         <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
                             value="{{ old('title') }}" placeholder="e.g. Television PDF">
@@ -63,6 +73,7 @@
                     <thead class="table-dark">
                         <tr>
                             <th>#</th>
+                            <th>CRM Type</th>
                             <th>Title</th>
                             <th>Tags</th>
                             <th>PDF</th>
@@ -73,6 +84,15 @@
                         @foreach($faqs as $i => $faq)
                             <tr>
                                 <td>{{ $i + 1 }}</td>
+                                <td>
+                                    @if($faq->crm_type === 'teachers_crm')
+                                        <span class="badge bg-primary">Teachers CRM</span>
+                                    @elseif($faq->crm_type === 'kids_crm')
+                                        <span class="badge bg-success">Kids CRM</span>
+                                    @else
+                                        <span class="badge bg-secondary">Both</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <strong>{{ $faq->title }}</strong>
                                     @if($faq->description)
@@ -128,6 +148,14 @@
                                             enctype="multipart/form-data">
                                             @csrf @method('PUT')
                                             <div class="modal-body row g-3">
+                                                <div class="col-12">
+                                                    <label class="form-label fw-semibold">CRM Type</label>
+                                                    <select name="crm_type" class="form-select">
+                                                        <option value="">-- All / Both --</option>
+                                                        <option value="teachers_crm" {{ $faq->crm_type == 'teachers_crm' ? 'selected' : '' }}>Teachers CRM</option>
+                                                        <option value="kids_crm" {{ $faq->crm_type == 'kids_crm' ? 'selected' : '' }}>Kids CRM</option>
+                                                    </select>
+                                                </div>
                                                 <div class="col-12">
                                                     <label class="form-label fw-semibold">Title</label>
                                                     <input type="text" name="title" class="form-control"

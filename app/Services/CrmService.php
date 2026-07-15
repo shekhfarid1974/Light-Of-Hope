@@ -38,10 +38,10 @@ class CrmService
             \App\Models\CallBack::create([
                 'crm_id'   => $crm->id,
                 'crm_type' => get_class($crm),
-                'name'     => $crm->parents_name ?? $crm->trainee_name ?? '—',
+                'name'     => $crm->customer_name ?? (($crm->father_name || $crm->mother_name) ? trim(($crm->father_name ?? '') . ' / ' . ($crm->mother_name ?? ''), ' /') : '—'),
                 'date'     => $data['call_back_date'] ?? null,
                 'time'     => $data['call_back_time'] ?? null,
-                'remarks'  => $crm->remarks ?? $crm->query_complaint,
+                'remarks'  => $crm->discussion_note ?? '—',
             ]);
         }
 
@@ -55,14 +55,14 @@ class CrmService
         return $records->map(function ($r) {
             return [
                 'id' => $r->id,
-                'parents_name' => $r->parents_name ?? $r->trainee_name ?? '—',
-                'phone' => $r->phone,
+                'parents_name' => $r->customer_name ?? (($r->father_name || $r->mother_name) ? trim(($r->father_name ?? '') . ' / ' . ($r->mother_name ?? ''), ' /') : '—'),
+                'phone' => $r->phone ?? $r->father_phone ?? '—',
                 'district' => $r->district ? $r->district->name : '—',
-                'interested_for' => $r->interested_for ?? '—',
+                'interested_for' => $r->course ?? $r->interest_for ?? '—',
                 'calling_status' => $r->calling_status,
-                'query_source' => $r->query_source,
-                'query_status' => $r->query_status,
-                'assigned_person' => $r->assigned_person,
+                'query_source' => $r->calling_purpose ?? '—',
+                'query_status' => $r->calling_agent ?? '—',
+                'assigned_person' => $r->branch ?? '—',
                 'data_source' => $r->dataSource ? $r->dataSource->name : '—',
                 'date' => $r->created_at->format('d M Y h:i A'),
             ];

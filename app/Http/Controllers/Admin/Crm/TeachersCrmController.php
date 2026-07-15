@@ -24,23 +24,47 @@ class TeachersCrmController extends Controller
         $districts   = District::orderBy('name')->get();
         $dataSources = DataSource::orderBy('name')->get();
         
-        $options = CrmOption::all()->groupBy('type');
-        $interestedForOptions = $options->get('interested_for', collect());
+        $options = CrmOption::where('crm_type', 'teachers_crm')->get()->groupBy('type');
+        
+        $genderOptions = $options->get('gender', collect());
+        $eduQualificationOptions = $options->get('educational_qualification', collect());
+        $joiningAsOptions = $options->get('joining_as', collect());
+        $courseOptions = $options->get('course', collect());
+        
+        $currentDesignationOptions = $options->get('current_designation', collect());
+        $teachingGroupOptions = $options->get('teaching_group', collect());
+        $institutionTypeOptions = $options->get('institution_type', collect());
+        
+        $childGenderOptions = $options->get('child_gender', collect());
+        
+        $otherTypeOptions = $options->get('other_type', collect());
+        
+        $callingAgentOptions = $options->get('calling_agent', collect());
+        $callingPurposeOptions = $options->get('calling_purpose', collect());
         $callingStatusOptions = $options->get('calling_status', collect());
-        $querySourceOptions = $options->get('query_source', collect());
-        $queryStatusOptions = $options->get('query_status', collect());
-        $assignedPersonOptions = $options->get('assigned_person', collect());
         $callBackOptions = $options->get('call_back', collect());
+        
+        $interestedCourseOptions = $options->get('interested_course', collect());
+        $branchOptions = $options->get('branch', collect());
 
         return view('admin.crm.teachers_crm.form', compact(
             'districts', 
             'dataSources', 
-            'interestedForOptions', 
-            'callingStatusOptions', 
-            'querySourceOptions', 
-            'queryStatusOptions',
-            'assignedPersonOptions',
-            'callBackOptions'
+            'genderOptions',
+            'eduQualificationOptions',
+            'joiningAsOptions',
+            'courseOptions',
+            'currentDesignationOptions',
+            'teachingGroupOptions',
+            'institutionTypeOptions',
+            'childGenderOptions',
+            'otherTypeOptions',
+            'callingAgentOptions',
+            'callingPurposeOptions',
+            'callingStatusOptions',
+            'callBackOptions',
+            'interestedCourseOptions',
+            'branchOptions'
         ));
     }
 

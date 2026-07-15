@@ -19,6 +19,7 @@ class FAQController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'crm_type' => 'nullable|string|max:50',
             'title'    => 'required|string|max:255',
             'pdf_file' => 'nullable|file|mimes:pdf|max:10240',
         ]);
@@ -29,6 +30,7 @@ class FAQController extends Controller
         }
 
         FAQ::create([
+            'crm_type'    => $request->crm_type,
             'title'       => $request->title,
             'description' => $request->description,
             'tags'        => $request->tags,
@@ -42,6 +44,7 @@ class FAQController extends Controller
     public function update(Request $request, FAQ $faq)
     {
         $request->validate([
+            'crm_type' => 'nullable|string|max:50',
             'title'    => 'required|string|max:255',
             'pdf_file' => 'nullable|file|mimes:pdf|max:10240',
         ]);
@@ -54,6 +57,7 @@ class FAQController extends Controller
         }
 
         $faq->update([
+            'crm_type'    => $request->crm_type,
             'title'       => $request->title,
             'description' => $request->description,
             'tags'        => $request->tags,
@@ -78,12 +82,25 @@ class FAQController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
+        $crmType = $request->crm_type;
 
-        $faqs = FAQ::where('title', 'LIKE', "%{$search}%")
-            ->orWhere('description', 'LIKE', "%{$search}%")
-            ->orWhere('tags', 'LIKE', "%{$search}%")
-            ->limit(10)
-            ->get();
+        $query = FAQ::query();
+
+        if ($crmType) {
+            $query->where(function($q) use ($crmType) {
+                $q->where('crm_type', $crmType)
+                  ->orWhereNull('crm_type')
+                  ->orWhere('crm_type', 'both');
+            });
+        }
+
+        $faqs = $query->where(function($q) use ($search) {
+            $q->where('title', 'LIKE', "%{$search}%")
+              ->orWhere('description', 'LIKE', "%{$search}%")
+              ->orWhere('tags', 'LIKE', "%{$search}%");
+        })
+        ->limit(10)
+        ->get();
 
         return response()->json($faqs);
     }

@@ -4,13 +4,27 @@
 
 @section('content')
 <div class="row">
+    {{-- Tab for selecting CRM Type --}}
+    <div class="col-12 mb-3">
+        <ul class="nav nav-pills">
+            @foreach($crmTypes as $key => $label)
+                <li class="nav-item">
+                    <a class="nav-link {{ $currentCrmType === $key ? 'active fw-bold' : '' }}" 
+                       href="{{ route('crm-options.index', ['crm_type' => $key]) }}">
+                        {{ $label }}
+                    </a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+
     {{-- Sidebar for selecting the type --}}
     <div class="col-md-3 mb-4">
         <div class="card-box h-100">
-            <h6 class="fw-bold mb-3">Option Types</h6>
+            <h6 class="fw-bold mb-3">Option Fields</h6>
             <div class="list-group list-group-flush">
                 @foreach($types as $key => $label)
-                    <a href="{{ route('crm-options.index', ['type' => $key]) }}"
+                    <a href="{{ route('crm-options.index', ['crm_type' => $currentCrmType, 'type' => $key]) }}"
                        class="list-group-item list-group-item-action {{ $currentType === $key ? 'active fw-bold' : '' }}">
                        {{ $label }}
                     </a>
@@ -22,7 +36,7 @@
     {{-- Main content for managing the selected type --}}
     <div class="col-md-9">
         <div class="card-box mb-4">
-            <h5 class="fw-bold mb-3">Manage: {{ $types[$currentType] }}</h5>
+            <h5 class="fw-bold mb-3">Manage: {{ $crmTypes[$currentCrmType] }} - {{ $types[$currentType] }}</h5>
 
             @if(session('success'))
                 <div class="alert alert-success alert-dismissible fade show">
@@ -43,6 +57,7 @@
 
             <form action="{{ route('crm-options.store') }}" method="POST" class="d-flex gap-2">
                 @csrf
+                <input type="hidden" name="crm_type" value="{{ $currentCrmType }}">
                 <input type="hidden" name="type" value="{{ $currentType }}">
                 <input type="text" name="name" class="form-control" placeholder="Enter new {{ strtolower($types[$currentType]) }} option..." required>
                 <button type="submit" class="btn btn-primary px-4">Add</button>
@@ -86,7 +101,7 @@
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Edit {{ $types[$currentType] }}</h5>
+                                                <h5 class="modal-title">Edit Option</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
                                             <div class="modal-body">

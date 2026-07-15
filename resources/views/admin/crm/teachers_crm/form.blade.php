@@ -1,23 +1,22 @@
 @extends('layouts.blank')
 
-@section('page-title', 'CRM Form')
+@section('page-title', 'Teachers CRM Form')
 
 @section('content')
 
     {{-- ===================== TOP HEADER CARD ===================== --}}
     <div class="card-box mb-3 py-3">
         <div class="row align-items-center">
-
             {{-- Left: Branding --}}
             <div class="col-md-3 border-end">
                 <div class="fw-bold fs-4" style="color:#0f172a; letter-spacing:-.5px;">Light of Hope</div>
-                <div class="text-muted small fw-semibold">Light of Hope CRM</div>
-                <div class="text-muted" style="font-size:.75rem;">Complete customer query and enrollment system</div>
+                <div class="text-muted small fw-semibold">Teachers Time CRM</div>
+                <div class="text-muted" style="font-size:.75rem;">Participant query and enrollment system</div>
             </div>
 
             {{-- Center: FAQ Search --}}
             <div class="col-md-5 px-4">
-                <label class="form-label fw-semibold small mb-1">Dynamic FAQ Search</label>
+                <label class="form-label fw-semibold small mb-1">Dynamic FAQ Search (Teachers)</label>
                 <div class="position-relative">
                     <input type="text" id="faqSearch" class="form-control form-control-sm"
                         placeholder="Search FAQ, help topics...">
@@ -26,7 +25,7 @@
                 </div>
             </div>
 
-            {{-- Right: agent name (UI only for now) --}}
+            {{-- Right: agent name --}}
             <div class="col-md-4">
                 <label for="agentNameInput" class="form-label fw-semibold small mb-1">Agent Name</label>
                 <input id="agentNameInput" class="form-control form-control-sm" readonly placeholder="No agent detected">
@@ -65,54 +64,33 @@
             </div>
         @endif
 
-        <form action="{{ route('crm.teachers_training.store') }}" method="POST" id="crmForm">
+        <form action="{{ route('crm.teachers_crm.store') }}" method="POST" id="crmForm">
             @csrf
 
             {{-- Hidden fields from URL --}}
-            <input type="hidden" name="campaign" id="campaign_field">
             <input type="hidden" name="agent" id="agent_field">
 
             {{-- ════════════════════════════════════════
-            SECTION 1 — Consumer Information
+            SECTION 1 — Participants' Info
             ════════════════════════════════════════ --}}
             <h6 class="fw-bold mb-3 pb-1" style="color:#2563eb; border-bottom:2px solid #2563eb;">
-                Consumer Information (Teachers Training)
+                Section 1: Participants' Info
             </h6>
 
             <div class="row g-3 mb-4">
-
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">
-                        Trainee Name <span class="text-danger">*</span>
-                    </label>
-                    <input type="text" name="trainee_name"
-                        class="form-control form-control-sm @error('trainee_name') is-invalid @enderror"
-                        value="{{ old('trainee_name') }}">
-                    @error('trainee_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    <label class="form-label small fw-semibold">Customer Name <span class="text-danger">*</span></label>
+                    <input type="text" name="customer_name" class="form-control form-control-sm" value="{{ old('customer_name') }}" required>
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">
-                        Experience
-                    </label>
-                    <input type="text" name="experience" class="form-control form-control-sm"
-                        value="{{ old('experience') }}" placeholder="e.g. 5 Years">
+                    <label class="form-label small fw-semibold">Phone <span class="text-danger">*</span></label>
+                    <input type="text" name="phone" id="phone" class="form-control form-control-sm" value="{{ old('phone') }}" required autocomplete="off">
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Profession</label>
-                    <input type="text" name="profession" class="form-control form-control-sm"
-                        value="{{ old('profession') }}" placeholder="e.g. Teacher, Doctor">
-                </div>
-
-                <div class="col-md-4">
-                    <label class="form-label small fw-semibold">
-                        Phone Number <span class="text-danger">*</span>
-                    </label>
-                    <input type="text" name="phone" id="phone"
-                        class="form-control form-control-sm @error('phone') is-invalid @enderror" value="{{ old('phone') }}"
-                        autocomplete="off">
-                    @error('phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    <label class="form-label small fw-semibold">WhatsApp</label>
+                    <input type="text" name="whatsapp" class="form-control form-control-sm" value="{{ old('whatsapp') }}">
                 </div>
 
                 <div class="col-md-4">
@@ -121,102 +99,229 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">District</label>
-                    <select name="district_id" class="form-select form-select-sm">
-                        <option value="">-- Select District --</option>
-                        @foreach($districts as $d)
-                            <option value="{{ $d->id }}" {{ old('district_id') == $d->id ? 'selected' : '' }}>
-                                {{ $d->name }}
-                            </option>
+                    <label class="form-label small fw-semibold">Gender</label>
+                    <select name="gender" class="form-select form-select-sm">
+                        <option value="">-- Select --</option>
+                        @foreach($genderOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('gender') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Trainee Age</label>
-                    <input type="text" name="trainee_age" class="form-control form-control-sm" value="{{ old('trainee_age') }}"
-                        placeholder="e.g. 25 years">
+                    <label class="form-label small fw-semibold">Area</label>
+                    <input type="text" name="area" class="form-control form-control-sm" value="{{ old('area') }}">
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Course Title</label>
-                    <input type="text" name="course_title" class="form-control form-control-sm" value="{{ old('course_title') }}"
-                        placeholder="e.g. Graphic Design">
+                    <label class="form-label small fw-semibold">District <span class="text-danger">*</span></label>
+                    <select name="district_id" class="form-select form-select-sm" required>
+                        <option value="">-- Select District --</option>
+                        @foreach($districts as $d)
+                            <option value="{{ $d->id }}" {{ old('district_id') == $d->id ? 'selected' : '' }}>{{ $d->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Age</label>
+                    <input type="number" name="age" class="form-control form-control-sm" value="{{ old('age') }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Educational Qualification</label>
+                    <select name="educational_qualification" class="form-select form-select-sm">
+                        <option value="">-- Select --</option>
+                        @foreach($eduQualificationOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('educational_qualification') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Joining As <span class="text-danger">*</span></label>
+                    <select name="joining_as" id="joining_as" class="form-select form-select-sm" required>
+                        <option value="">-- Select --</option>
+                        @foreach($joiningAsOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('joining_as') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Course</label>
+                    <select name="course" class="form-select form-select-sm">
+                        <option value="">-- Select --</option>
+                        @foreach($courseOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('course') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             {{-- ════════════════════════════════════════
-            SECTION 2 — Query & Complaint
+            SECTION 2 — Professional Summary (Tabs)
+            ════════════════════════════════════════ --}}
+            <div id="professionalSummaryCard" style="display:none;">
+                <h6 class="fw-bold mb-3 pb-1" style="color:#2563eb; border-bottom:2px solid #2563eb;">
+                    Section 2: Professional Summary
+                </h6>
+                
+                {{-- Tab Headers --}}
+                <ul class="nav nav-tabs mb-3" id="summaryTabs" role="tablist">
+                    <li class="nav-item" role="presentation" id="tabHeaderTeacher">
+                        <button class="nav-link active" id="teacher-tab" data-bs-toggle="tab" data-bs-target="#teacher-pane" type="button" role="tab">Teacher Info</button>
+                    </li>
+                    <li class="nav-item" role="presentation" id="tabHeaderParent">
+                        <button class="nav-link" id="parent-tab" data-bs-toggle="tab" data-bs-target="#parent-pane" type="button" role="tab">Child's Info</button>
+                    </li>
+                    <li class="nav-item" role="presentation" id="tabHeaderOther">
+                        <button class="nav-link" id="other-tab" data-bs-toggle="tab" data-bs-target="#other-pane" type="button" role="tab">Other Summary</button>
+                    </li>
+                </ul>
+
+                {{-- Tab Content --}}
+                <div class="tab-content border p-3 rounded bg-light mb-4" id="summaryTabsContent">
+                    {{-- Teacher Tab --}}
+                    <div class="tab-pane fade show active" id="teacher-pane" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label small fw-semibold">Current Designation</label>
+                                <select name="current_designation" class="form-select form-select-sm">
+                                    <option value="">-- Select --</option>
+                                    @foreach($currentDesignationOptions as $opt)
+                                        <option value="{{ $opt->name }}" {{ old('current_designation') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-semibold">Years of Experience</label>
+                                <input type="text" name="years_of_experience" class="form-control form-control-sm" value="{{ old('years_of_experience') }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-semibold">Teaching Group</label>
+                                <select name="teaching_group" class="form-select form-select-sm">
+                                    <option value="">-- Select --</option>
+                                    @foreach($teachingGroupOptions as $opt)
+                                        <option value="{{ $opt->name }}" {{ old('teaching_group') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Institution Name</label>
+                                <input type="text" name="institution_name" class="form-control form-control-sm" value="{{ old('institution_name') }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Institution Address</label>
+                                <input type="text" name="institution_address" class="form-control form-control-sm" value="{{ old('institution_address') }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-semibold">Institution Type</label>
+                                <select name="institution_type" class="form-select form-select-sm">
+                                    <option value="">-- Select --</option>
+                                    @foreach($institutionTypeOptions as $opt)
+                                        <option value="{{ $opt->name }}" {{ old('institution_type') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Parents Tab --}}
+                    <div class="tab-pane fade" id="parent-pane" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label small fw-semibold">Child Name</label>
+                                <input type="text" name="child_name" class="form-control form-control-sm" value="{{ old('child_name') }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-semibold">Child Gender</label>
+                                <select name="child_gender" class="form-select form-select-sm">
+                                    <option value="">-- Select --</option>
+                                    @foreach($childGenderOptions as $opt)
+                                        <option value="{{ $opt->name }}" {{ old('child_gender') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-semibold">DOB (Year/Number)</label>
+                                <input type="number" name="dob" class="form-control form-control-sm" value="{{ old('dob') }}" placeholder="e.g. 2018">
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Others Tab --}}
+                    <div class="tab-pane fade" id="other-pane" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Type</label>
+                                <select name="other_type" class="form-select form-select-sm">
+                                    <option value="">-- Select --</option>
+                                    @foreach($otherTypeOptions as $opt)
+                                        <option value="{{ $opt->name }}" {{ old('other_type') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Organization</label>
+                                <input type="text" name="organization" class="form-control form-control-sm" value="{{ old('organization') }}" placeholder="Applicable for Doctor, Trainer, etc.">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- ════════════════════════════════════════
+            SECTION 3 — Interaction Summary
             ════════════════════════════════════════ --}}
             <h6 class="fw-bold mb-3 pb-1" style="color:#2563eb; border-bottom:2px solid #2563eb;">
-                Query & Complaint
+                Section 3: Interaction Summary
             </h6>
 
             <div class="row g-3 mb-4">
-
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Interested For</label>
-                    <select name="interested_for" class="form-select form-select-sm">
+                    <label class="form-label small fw-semibold">Calling Agent</label>
+                    <select name="calling_agent" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
-                        @foreach($interestedForOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('interested_for') == $opt->name ? 'selected' : '' }}>
-                                {{ $opt->name }}
-                            </option>
+                        @foreach($callingAgentOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('calling_agent') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">
-                        Data Source <span class="text-danger">*</span>
-                    </label>
-                    <select name="data_source_id"
-                        class="form-select form-select-sm @error('data_source_id') is-invalid @enderror">
-                        <option value="">-- Select Source --</option>
-                        @foreach($dataSources as $s)
-                            <option value="{{ $s->id }}" {{ old('data_source_id') == $s->id ? 'selected' : '' }}>
-                                {{ $s->name }}
-                            </option>
+                    <label class="form-label small fw-semibold">Calling Purpose</label>
+                    <select name="calling_purpose" class="form-select form-select-sm">
+                        <option value="">-- Select --</option>
+                        @foreach($callingPurposeOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('calling_purpose') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
                         @endforeach
                     </select>
-                    @error('data_source_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Calling Status</label>
                     <select name="calling_status" class="form-select form-select-sm">
-                        <option value="">-- Select Status --</option>
+                        <option value="">-- Select --</option>
                         @foreach($callingStatusOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('calling_status') == $opt->name ? 'selected' : '' }}>
-                                {{ $opt->name }}
-                            </option>
+                            <option value="{{ $opt->name }}" {{ old('calling_status') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Query Source</label>
-                    <select name="query_source" class="form-select form-select-sm">
-                        <option value="">-- Select --</option>
-                        @foreach($querySourceOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('query_source') == $opt->name ? 'selected' : '' }}>
-                                {{ $opt->name }}
-                            </option>
+                    <label class="form-label small fw-semibold">Data Source</label>
+                    <select name="data_source_id" class="form-select form-select-sm">
+                        <option value="">-- Select Source --</option>
+                        @foreach($dataSources as $s)
+                            <option value="{{ $s->id }}" {{ old('data_source_id') == $s->id ? 'selected' : '' }}>{{ $s->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Query Status</label>
-                    <select name="query_status" class="form-select form-select-sm">
-                        <option value="">-- Select --</option>
-                        @foreach($queryStatusOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('query_status') == $opt->name ? 'selected' : '' }}>
-                                {{ $opt->name }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <label class="form-label small fw-semibold">Next Follow-up Date (Number)</label>
+                    <input type="text" name="next_follow_up_date" class="form-control form-control-sm" value="{{ old('next_follow_up_date') }}" placeholder="e.g. 5">
                 </div>
 
                 <div class="col-md-4">
@@ -224,43 +329,59 @@
                     <select name="call_back" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
                         @foreach($callBackOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('call_back') == $opt->name ? 'selected' : '' }}>
-                                {{ $opt->name }}
-                            </option>
+                            <option value="{{ $opt->name }}" {{ old('call_back') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
                         @endforeach
                     </select>
                 </div>
-                
-                <div class="col-md-2">
+
+                <div class="col-md-4">
                     <label class="form-label small fw-semibold">Call Back Date</label>
                     <input type="date" name="call_back_date" class="form-control form-control-sm" value="{{ old('call_back_date') }}">
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <label class="form-label small fw-semibold">Call Back Time</label>
                     <input type="time" name="call_back_time" class="form-control form-control-sm" value="{{ old('call_back_time') }}">
                 </div>
 
+                <div class="col-12">
+                    <label class="form-label small fw-semibold">Discussion Note</label>
+                    <textarea name="discussion_note" class="form-control form-control-sm" rows="3" placeholder="Enter discussion details...">{{ old('discussion_note') }}</textarea>
+                </div>
+            </div>
+
+            {{-- ════════════════════════════════════════
+            PRODUCT HISTORY
+            ════════════════════════════════════════ --}}
+            <h6 class="fw-bold mb-3 pb-1" style="color:#2563eb; border-bottom:2px solid #2563eb;">
+                Product History
+            </h6>
+
+            <div class="row g-3 mb-4">
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Assigned Person</label>
-                    <select name="assigned_person" id="assigned_person" class="form-select form-select-sm">
+                    <label class="form-label small fw-semibold">Interested Course/Product Name</label>
+                    <select name="interested_course" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
-                        @foreach($assignedPersonOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('assigned_person') == $opt->name ? 'selected' : '' }}>
-                                {{ $opt->name }}
-                            </option>
+                        @foreach($interestedCourseOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('interested_course') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
-                <div class="col-12">
-                    <label class="form-label small fw-semibold">
-                        Query & Complaint <span class="text-danger">*</span>
-                    </label>
-                    <textarea name="query_complaint" class="form-control form-control-sm" rows="3"
-                        placeholder="Query or complaint details...">{{ old('query_complaint') }}</textarea>
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Date of Purchase</label>
+                    <input type="date" name="date_of_purchase" class="form-control form-control-sm" value="{{ old('date_of_purchase') }}">
                 </div>
 
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Branch</label>
+                    <select name="branch" class="form-select form-select-sm">
+                        <option value="">-- Select --</option>
+                        @foreach($branchOptions as $opt)
+                            <option value="{{ $opt->name }}" {{ old('branch') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             {{-- Save Button --}}
@@ -269,7 +390,6 @@
                     Save Record
                 </button>
             </div>
-
         </form>
     </div>
 
@@ -290,23 +410,21 @@
                 <thead class="table-light">
                     <tr>
                         <th>Record ID</th>
-                        <th>Parent Name</th>
+                        <th>Customer/Parent Name</th>
                         <th>Phone</th>
                         <th>District</th>
-                        <th>Interested For</th>
+                        <th>Course/Interest</th>
                         <th>Calling Status</th>
-                        <th>Query Source</th>
-                        <th>Query Status</th>
-                        <th>Assigned Person</th>
+                        <th>Calling Purpose</th>
+                        <th>Calling Agent</th>
+                        <th>Branch</th>
                         <th>Data Source</th>
                         <th>Register Date</th>
                     </tr>
                 </thead>
                 <tbody id="historyBody">
                     <tr>
-                        <td colspan="11" class="text-center text-danger py-3">
-                            No Data Found
-                        </td>
+                        <td colspan="11" class="text-center text-danger py-3">No Data Found</td>
                     </tr>
                 </tbody>
             </table>
@@ -323,7 +441,6 @@
 @push('scripts')
     <script>
         $(function () {
-
             // ─── Pre-fill from URL params ───────────────────────────────
             const params = new URLSearchParams(window.location.search);
 
@@ -333,13 +450,40 @@
                 if (ph.length >= 6) loadHistory(ph);
             }
 
-            if (params.get('assigned_person')) $('#assigned_person').val(params.get('assigned_person'));
-            if (params.get('campaign')) $('#campaign_field').val(params.get('campaign'));
             if (params.get('agent')) {
                 const agent = params.get('agent');
                 $('#agent_field').val(agent);
                 $('#agentNameInput').val(agent);
             }
+
+            // Joining As Tabs management
+            function handleJoiningAsChange() {
+                const val = $('#joining_as').val();
+                if (val) {
+                    $('#professionalSummaryCard').show();
+                    if (val.toLowerCase() === 'teacher') {
+                        $('#tabHeaderTeacher').show();
+                        $('#tabHeaderParent').hide();
+                        $('#tabHeaderOther').hide();
+                        $('#teacher-tab').tab('show');
+                    } else if (val.toLowerCase() === 'parent') {
+                        $('#tabHeaderTeacher').hide();
+                        $('#tabHeaderParent').show();
+                        $('#tabHeaderOther').hide();
+                        $('#parent-tab').tab('show');
+                    } else {
+                        $('#tabHeaderTeacher').hide();
+                        $('#tabHeaderParent').hide();
+                        $('#tabHeaderOther').show();
+                        $('#other-tab').tab('show');
+                    }
+                } else {
+                    $('#professionalSummaryCard').hide();
+                }
+            }
+
+            $('#joining_as').on('change', handleJoiningAsChange);
+            handleJoiningAsChange(); // run initially
 
             // ─── FAQ AJAX Search ────────────────────────────────────────
             let faqTimer;
@@ -349,7 +493,7 @@
                 if (q.length < 2) { $('#faqSuggestions').hide().empty(); return; }
 
                 faqTimer = setTimeout(function () {
-                    $.getJSON("{{ route('faq.search') }}", { search: q }, function (data) {
+                    $.getJSON("{{ route('faq.search') }}", { search: q, crm_type: 'teachers_crm' }, function (data) {
                         const $ul = $('#faqSuggestions').empty();
                         if (!data.length) {
                             $ul.append('<li class="list-group-item text-muted small py-2">No results found.</li>').show();
@@ -415,7 +559,7 @@
                 $('#historyLoader').show();
                 $('#historyBody').html('');
 
-                $.getJSON("{{ route('crm.teachers_training.history') }}", { phone: phone }, function (records) {
+                $.getJSON("{{ route('crm.teachers_crm.history') }}", { phone: phone }, function (records) {
                     $('#historyLoader').hide();
                     allRecords = records;
                     currentPage = 0;
@@ -438,36 +582,30 @@
                 const $tbody = $('#historyBody').empty();
 
                 const statusColor = {
-                    'Enrolled': 'success', 'Trial Class': 'info', 'Pending': 'warning',
-                    'Cancel': 'danger', 'No Interaction': 'secondary', 'No Communication': 'dark'
-                };
-                const qColor = {
-                    'Done': 'success', 'Pending': 'warning', 'Cancel': 'danger', 'No Interaction': 'secondary'
+                    'Paid': 'success', 'Confirm': 'success', 'Pending': 'warning',
+                    'Cancel': 'danger', 'No Interaction': 'secondary', 'No Communication': 'dark', 'Switched Off': 'danger'
                 };
 
                 page.forEach(function (r) {
                     const cs = r.calling_status
                         ? `<span class="badge bg-${statusColor[r.calling_status] || 'secondary'}">${r.calling_status}</span>`
                         : '—';
-                    const qs = r.query_status
-                        ? `<span class="badge bg-${qColor[r.query_status] || 'secondary'}">${r.query_status}</span>`
-                        : '—';
 
                     $tbody.append(`
-                                        <tr>
-                                            <td>#${r.id}</td>
-                                            <td>${r.parents_name}</td>
-                                            <td>${r.phone}</td>
-                                            <td>${r.district}</td>
-                                            <td>${r.interested_for || '—'}</td>
-                                            <td>${cs}</td>
-                                            <td>${r.query_source || '—'}</td>
-                                            <td>${qs}</td>
-                                            <td>${r.assigned_person}</td>
-                                            <td>${r.data_source}</td>
-                                            <td>${r.date}</td>
-                                        </tr>
-                                    `);
+                        <tr>
+                            <td>#${r.id}</td>
+                            <td>${r.parents_name}</td>
+                            <td>${r.phone}</td>
+                            <td>${r.district}</td>
+                            <td>${r.interested_for || '—'}</td>
+                            <td>${cs}</td>
+                            <td>${r.query_source || '—'}</td>
+                            <td>${r.query_status || '—'}</td>
+                            <td>${r.assigned_person || '—'}</td>
+                            <td>${r.data_source}</td>
+                            <td>${r.date}</td>
+                        </tr>
+                    `);
                 });
 
                 $('#historyPrev').prop('disabled', currentPage === 0);

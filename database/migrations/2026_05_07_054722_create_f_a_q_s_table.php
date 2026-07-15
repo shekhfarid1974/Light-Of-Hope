@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
+            $table->string('crm_type')->nullable(); // teachers_crm, kids_crm
             $table->string('title');
             $table->text('description')->nullable();
             $table->text('tags')->nullable();

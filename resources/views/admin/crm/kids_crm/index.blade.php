@@ -20,6 +20,13 @@
             </div>
         @endif
 
+        <div class="row mb-3">
+            <div class="col-md-3"><input type="text" id="filterPhone" class="form-control" placeholder="Filter by Phone"></div>
+            <div class="col-md-3"><input type="text" id="filterQuerySource" class="form-control" placeholder="Filter by Query Source"></div>
+            <div class="col-md-3"><input type="text" id="filterAssignedPerson" class="form-control" placeholder="Filter by Assigned Person"></div>
+            <div class="col-md-3"><input type="date" id="filterDateFrom" class="form-control" placeholder="From Date"></div>
+            <div class="col-md-3"><input type="date" id="filterDateTo" class="form-control" placeholder="To Date"></div>
+        </div>
         <div class="table-responsive">
             <table id="crmTable" class="table table-hover table-bordered align-middle" style="width:100%">
                 <thead class="table-dark">
@@ -116,8 +123,8 @@
 @push('scripts')
     <script>
         $(function () {
-            $('#crmTable').DataTable({
-                order: [[12, 'desc']],
+            var table = $('#crmTable').DataTable({
+                order: [[19, 'desc']],
                 pageLength: 25,
                 dom: 'Bfrtip',
                 buttons: [
@@ -126,6 +133,27 @@
                     { extend: 'print', text: '<i class="bi bi-printer"></i> Print', className: 'btn btn-sm btn-secondary' }
                 ]
             });
+            // Filters
+            $('#filterPhone').on('keyup change', function () { table.column(2).search(this.value).draw(); });
+            $('#filterQuerySource').on('keyup change', function () { table.column(12).search(this.value).draw(); });
+            $('#filterAssignedPerson').on('keyup change', function () { table.column(15).search(this.value).draw(); });
+
+            // Date range filter
+            $.fn.dataTable.ext.search.push(
+                function(settings, data, dataIndex) {
+                    var min = $('#filterDateFrom').val();
+                    var max = $('#filterDateTo').val();
+                    var dateStr = data[19]; // Expected format 'd M Y'
+                    if (dateStr) {
+                        var parts = dateStr.split(' ');
+                        var parsed = new Date(parts[2] + '-' + (new Date(Date.parse(parts[1] + " 1, 2020")).getMonth() + 1).toString().padStart(2, '0') + '-' + parts[0].padStart(2, '0'));
+                        if (min && parsed < new Date(min)) { return false; }
+                        if (max && parsed > new Date(max)) { return false; }
+                    }
+                    return true;
+                }
+            );
+            $('#filterDateFrom, #filterDateTo').on('change', function () { table.draw(); });
         });
     </script>
 @endpush

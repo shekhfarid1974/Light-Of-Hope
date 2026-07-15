@@ -9,5 +9,5 @@ class CrmOption extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['type', 'name'];
+    protected $fillable = ['crm_type', 'type', 'name'];
 }

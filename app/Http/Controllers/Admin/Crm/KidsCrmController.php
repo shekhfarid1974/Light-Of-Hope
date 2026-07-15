@@ -24,23 +24,30 @@ class KidsCrmController extends Controller
         $districts   = District::orderBy('name')->get();
         $dataSources = DataSource::orderBy('name')->get();
         
-        $options = CrmOption::all()->groupBy('type');
-        $interestedForOptions = $options->get('interested_for', collect());
+        $options = CrmOption::where('crm_type', 'kids_crm')->get()->groupBy('type');
+        
+        $interestForOptions = $options->get('interest_for', collect());
+        $childGenderOptions = $options->get('child_gender', collect());
+        
+        $callingAgentOptions = $options->get('calling_agent', collect());
+        $callingPurposeOptions = $options->get('calling_purpose', collect());
         $callingStatusOptions = $options->get('calling_status', collect());
-        $querySourceOptions = $options->get('query_source', collect());
-        $queryStatusOptions = $options->get('query_status', collect());
-        $assignedPersonOptions = $options->get('assigned_person', collect());
         $callBackOptions = $options->get('call_back', collect());
+        
+        $courseNameOptions = $options->get('course_name', collect());
+        $branchOptions = $options->get('branch', collect());
 
         return view('admin.crm.kids_crm.form', compact(
             'districts', 
             'dataSources', 
-            'interestedForOptions', 
-            'callingStatusOptions', 
-            'querySourceOptions', 
-            'queryStatusOptions',
-            'assignedPersonOptions',
-            'callBackOptions'
+            'interestForOptions',
+            'childGenderOptions',
+            'callingAgentOptions',
+            'callingPurposeOptions',
+            'callingStatusOptions',
+            'callBackOptions',
+            'courseNameOptions',
+            'branchOptions'
         ));
     }
 

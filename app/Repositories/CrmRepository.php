@@ -62,14 +62,26 @@ class CrmRepository implements CrmRepositoryInterface
 
     public function getHistoryByPhone(string $phone)
     {
-        $course = KidsCrm::with(['district', 'dataSource'])->where('phone', $phone)->latest()->get()->map(function($item) {
-            $item->crm_type = 'kids_crm';
-            return $item;
-        });
-        $teachers = TeachersCrm::with(['district', 'dataSource'])->where('phone', $phone)->latest()->get()->map(function($item) {
-            $item->crm_type = 'teachers_crm';
-            return $item;
-        });
+        $course = KidsCrm::with(['district', 'dataSource'])
+            ->where(function($q) use ($phone) {
+                $q->where('father_phone', $phone)
+                  ->orWhere('mother_phone', $phone);
+            })
+            ->latest()
+            ->get()
+            ->map(function($item) {
+                $item->crm_type = 'kids_crm';
+                return $item;
+            });
+            
+        $teachers = TeachersCrm::with(['district', 'dataSource'])
+            ->where('phone', $phone)
+            ->latest()
+            ->get()
+            ->map(function($item) {
+                $item->crm_type = 'teachers_crm';
+                return $item;
+            });
 
         return $course->concat($teachers)->sortByDesc('created_at')->values();
     }

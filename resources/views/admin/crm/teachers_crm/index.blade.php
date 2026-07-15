@@ -7,7 +7,7 @@
     <div class="card-box">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h6 class="fw-bold mb-0"><i class="bi bi-table"></i> Teachers Training CRM Records</h6>
-            <a href="{{ route('crm.teachers_training.form') }}?phone_number=&agent={{ urlencode(auth()->user()->name) }}&campaign="
+            <a href="{{ route('crm.teachers_crm.form') }}?phone_number=&agent={{ urlencode(auth()->user()->name) }}&campaign="
                 target="_blank" class="btn btn-primary btn-sm">
                 <i class="bi bi-plus-circle"></i> Add New
             </a>
@@ -19,6 +19,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         @endif
+
+        <div class="row mb-3">
+            <div class="col-md-3"><input type="text" id="filterPhone" class="form-control" placeholder="Filter by Phone"></div>
+            <div class="col-md-3"><input type="text" id="filterQuerySource" class="form-control" placeholder="Filter by Query Source"></div>
+            <div class="col-md-3"><input type="text" id="filterAssignedPerson" class="form-control" placeholder="Filter by Assigned Person"></div>
+            <div class="col-md-3"><input type="date" id="filterDateFrom" class="form-control" placeholder="From Date"></div>
+            <div class="col-md-3"><input type="date" id="filterDateTo" class="form-control" placeholder="To Date"></div>
+        </div>
 
         <div class="table-responsive">
             <table id="crmTable" class="table table-hover table-bordered align-middle" style="width:100%">
@@ -111,17 +119,40 @@
 
 @push('scripts')
     <script>
-        $(function () {
-            $('#crmTable').DataTable({
-                order: [[12, 'desc']],
-                pageLength: 25,
-                dom: 'Bfrtip',
-                buttons: [
-                    { extend: 'csvHtml5', text: '<i class="bi bi-filetype-csv"></i> CSV', className: 'btn btn-sm btn-success me-1' },
-                    { extend: 'excelHtml5', text: '<i class="bi bi-file-earmark-excel"></i> Excel', className: 'btn btn-sm btn-success me-1' },
-                    { extend: 'print', text: '<i class="bi bi-printer"></i> Print', className: 'btn btn-sm btn-secondary' }
-                ]
-            });
+    $(function () {
+        var table = $('#crmTable').DataTable({
+            order: [[17, 'desc']],
+            pageLength: 25,
+            dom: 'Bfrtip',
+            buttons: [
+                { extend: 'csvHtml5', text: '<i class="bi bi-filetype-csv"></i> CSV', className: 'btn btn-sm btn-success me-1' },
+                { extend: 'excelHtml5', text: '<i class="bi bi-file-earmark-excel"></i> Excel', className: 'btn btn-sm btn-success me-1' },
+                { extend: 'pdfHtml5', text: '<i class="bi bi-file-earmark-pdf"></i> PDF', className: 'btn btn-sm btn-danger me-1' },
+                { extend: 'print', text: '<i class="bi bi-printer"></i> Print', className: 'btn btn-sm btn-secondary' }
+            ]
         });
-    </script>
+        // Filters
+        $('#filterPhone').on('keyup change', function () { table.column(2).search(this.value).draw(); });
+        $('#filterQuerySource').on('keyup change', function () { table.column(10).search(this.value).draw(); });
+        $('#filterAssignedPerson').on('keyup change', function () { table.column(13).search(this.value).draw(); });
+
+        // Date range filter
+        $.fn.dataTable.ext.search.push(
+            function(settings, data, dataIndex) {
+                var min = $('#filterDateFrom').val();
+                var max = $('#filterDateTo').val();
+                var dateStr = data[17]; // Expected format 'd M Y'
+                if (dateStr) {
+                    var parts = dateStr.split(' ');
+                    // Convert to YYYY-MM-DD
+                    var parsed = new Date(parts[2] + '-' + (new Date(Date.parse(parts[1] + " 1, 2020")).getMonth() + 1).toString().padStart(2, '0') + '-' + parts[0].padStart(2, '0'));
+                    if (min && parsed < new Date(min)) { return false; }
+                    if (max && parsed > new Date(max)) { return false; }
+                }
+                return true;
+            }
+        );
+        $('#filterDateFrom, #filterDateTo').on('change', function () { table.draw(); });
+    });
+</script>
 @endpush

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('crm_options', function (Blueprint $table) {
             $table->id();
-            $table->string('type'); // interested_for, calling_status, query_source, query_status, assigned_person
+            $table->string('crm_type')->nullable(); // teachers_crm, kids_crm
+            $table->string('type'); // e.g. interested_for, calling_status, etc.
             $table->string('name');
             $table->timestamps();
         });

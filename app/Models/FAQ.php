@@ -12,6 +12,7 @@ class FAQ extends Model
     protected $table = 'faqs';
 
     protected $fillable = [
+        'crm_type',
         'title',
         'description',
         'tags',
