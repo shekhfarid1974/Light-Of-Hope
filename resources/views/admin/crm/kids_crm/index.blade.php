@@ -21,9 +21,12 @@
         @endif
 
         <div class="row mb-3">
-            <div class="col-md-3"><input type="text" id="filterPhone" class="form-control" placeholder="Filter by Phone"></div>
-            <div class="col-md-3"><input type="text" id="filterQuerySource" class="form-control" placeholder="Filter by Query Source"></div>
-            <div class="col-md-3"><input type="text" id="filterAssignedPerson" class="form-control" placeholder="Filter by Assigned Person"></div>
+            <div class="col-md-3"><input type="text" id="filterPhone" class="form-control" placeholder="Filter by Phone">
+            </div>
+            <div class="col-md-3"><input type="text" id="filterQuerySource" class="form-control"
+                    placeholder="Filter by Query Source"></div>
+            <div class="col-md-3"><input type="text" id="filterAssignedPerson" class="form-control"
+                    placeholder="Filter by Assigned Person"></div>
             <div class="col-md-3"><input type="date" id="filterDateFrom" class="form-control" placeholder="From Date"></div>
             <div class="col-md-3"><input type="date" id="filterDateTo" class="form-control" placeholder="To Date"></div>
         </div>
@@ -140,7 +143,7 @@
 
             // Date range filter
             $.fn.dataTable.ext.search.push(
-                function(settings, data, dataIndex) {
+                function (settings, data, dataIndex) {
                     var min = $('#filterDateFrom').val();
                     var max = $('#filterDateTo').val();
                     var dateStr = data[19]; // Expected format 'd M Y'

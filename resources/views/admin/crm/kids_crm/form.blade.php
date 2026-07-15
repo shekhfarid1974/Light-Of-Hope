@@ -80,37 +80,46 @@
             <div class="row g-3 mb-4">
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Father's Name <span class="text-danger">*</span></label>
-                    <input type="text" name="father_name" class="form-control form-control-sm" value="{{ old('father_name') }}" required>
+                    <input type="text" name="father_name" class="form-control form-control-sm"
+                        value="{{ old('father_name') }}" required>
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Mother's Name <span class="text-danger">*</span></label>
-                    <input type="text" name="mother_name" class="form-control form-control-sm" value="{{ old('mother_name') }}" required>
+                    <input type="text" name="mother_name" class="form-control form-control-sm"
+                        value="{{ old('mother_name') }}" required>
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Father's Phone number <span class="text-danger">*</span></label>
-                    <input type="text" name="father_phone" id="phone" class="form-control form-control-sm" value="{{ old('father_phone') }}" required autocomplete="off">
+                    <label class="form-label small fw-semibold">Father's Phone number <span
+                            class="text-danger">*</span></label>
+                    <input type="text" name="father_phone" id="phone" class="form-control form-control-sm"
+                        value="{{ old('father_phone') }}" required autocomplete="off">
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label small fw-semibold">Mother's Phone number <span class="text-danger">*</span></label>
-                    <input type="text" name="mother_phone" class="form-control form-control-sm" value="{{ old('mother_phone') }}" required>
+                    <label class="form-label small fw-semibold">Mother's Phone number <span
+                            class="text-danger">*</span></label>
+                    <input type="text" name="mother_phone" class="form-control form-control-sm"
+                        value="{{ old('mother_phone') }}" required>
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">WhatsApp number <span class="text-danger">*</span></label>
-                    <input type="text" name="whatsapp" class="form-control form-control-sm" value="{{ old('whatsapp') }}" required>
+                    <input type="text" name="whatsapp" class="form-control form-control-sm" value="{{ old('whatsapp') }}"
+                        required>
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Email <span class="text-danger">*</span></label>
-                    <input type="email" name="email" class="form-control form-control-sm" value="{{ old('email') }}" required>
+                    <input type="email" name="email" class="form-control form-control-sm" value="{{ old('email') }}"
+                        required>
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Profession <span class="text-danger">*</span></label>
-                    <input type="text" name="profession" class="form-control form-control-sm" value="{{ old('profession') }}" required>
+                    <input type="text" name="profession" class="form-control form-control-sm"
+                        value="{{ old('profession') }}" required>
                 </div>
 
                 <div class="col-md-4">
@@ -118,7 +127,8 @@
                     <select name="district_id" class="form-select form-select-sm">
                         <option value="">-- Select District --</option>
                         @foreach($districts as $d)
-                            <option value="{{ $d->id }}" {{ old('district_id') == $d->id ? 'selected' : '' }}>{{ $d->name }}</option>
+                            <option value="{{ $d->id }}" {{ old('district_id') == $d->id ? 'selected' : '' }}>{{ $d->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -133,7 +143,8 @@
                     <select name="interest_for" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
                         @foreach($interestForOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('interest_for') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                            <option value="{{ $opt->name }}" {{ old('interest_for') == $opt->name ? 'selected' : '' }}>
+                                {{ $opt->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -149,7 +160,8 @@
             <div class="row g-3 mb-4">
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Child Name</label>
-                    <input type="text" name="child_name" class="form-control form-control-sm" value="{{ old('child_name') }}">
+                    <input type="text" name="child_name" class="form-control form-control-sm"
+                        value="{{ old('child_name') }}">
                 </div>
 
                 <div class="col-md-4">
@@ -157,7 +169,8 @@
                     <select name="child_gender" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
                         @foreach($childGenderOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('child_gender') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                            <option value="{{ $opt->name }}" {{ old('child_gender') == $opt->name ? 'selected' : '' }}>
+                                {{ $opt->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -169,7 +182,8 @@
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Age</label>
-                    <input type="number" name="child_age" class="form-control form-control-sm" value="{{ old('child_age') }}">
+                    <input type="number" name="child_age" class="form-control form-control-sm"
+                        value="{{ old('child_age') }}">
                 </div>
 
                 <div class="col-md-4">
@@ -179,7 +193,8 @@
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">School Name</label>
-                    <input type="text" name="school_name" class="form-control form-control-sm" value="{{ old('school_name') }}">
+                    <input type="text" name="school_name" class="form-control form-control-sm"
+                        value="{{ old('school_name') }}">
                 </div>
             </div>
 
@@ -193,7 +208,8 @@
             <div class="row g-3 mb-4">
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Date</label>
-                    <input type="date" name="calling_date" class="form-control form-control-sm" value="{{ old('calling_date') }}">
+                    <input type="date" name="calling_date" class="form-control form-control-sm"
+                        value="{{ old('calling_date') }}">
                 </div>
 
                 <div class="col-md-4">
@@ -201,7 +217,8 @@
                     <select name="calling_agent" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
                         @foreach($callingAgentOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('calling_agent') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                            <option value="{{ $opt->name }}" {{ old('calling_agent') == $opt->name ? 'selected' : '' }}>
+                                {{ $opt->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -211,7 +228,8 @@
                     <select name="calling_purpose" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
                         @foreach($callingPurposeOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('calling_purpose') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                            <option value="{{ $opt->name }}" {{ old('calling_purpose') == $opt->name ? 'selected' : '' }}>
+                                {{ $opt->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -221,14 +239,16 @@
                     <select name="calling_status" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
                         @foreach($callingStatusOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('calling_status') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                            <option value="{{ $opt->name }}" {{ old('calling_status') == $opt->name ? 'selected' : '' }}>
+                                {{ $opt->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Next Follow-up Date</label>
-                    <input type="date" name="next_follow_up_date" class="form-control form-control-sm" value="{{ old('next_follow_up_date') }}">
+                    <input type="date" name="next_follow_up_date" class="form-control form-control-sm"
+                        value="{{ old('next_follow_up_date') }}">
                 </div>
 
                 <div class="col-md-4">
@@ -236,19 +256,22 @@
                     <select name="call_back" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
                         @foreach($callBackOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('call_back') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                            <option value="{{ $opt->name }}" {{ old('call_back') == $opt->name ? 'selected' : '' }}>
+                                {{ $opt->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Call Back Date</label>
-                    <input type="date" name="call_back_date" class="form-control form-control-sm" value="{{ old('call_back_date') }}">
+                    <input type="date" name="call_back_date" class="form-control form-control-sm"
+                        value="{{ old('call_back_date') }}">
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Call Back Time</label>
-                    <input type="time" name="call_back_time" class="form-control form-control-sm" value="{{ old('call_back_time') }}">
+                    <input type="time" name="call_back_time" class="form-control form-control-sm"
+                        value="{{ old('call_back_time') }}">
                 </div>
 
                 <div class="col-md-4">
@@ -256,14 +279,16 @@
                     <select name="data_source_id" class="form-select form-select-sm">
                         <option value="">-- Select Source --</option>
                         @foreach($dataSources as $s)
-                            <option value="{{ $s->id }}" {{ old('data_source_id') == $s->id ? 'selected' : '' }}>{{ $s->name }}</option>
+                            <option value="{{ $s->id }}" {{ old('data_source_id') == $s->id ? 'selected' : '' }}>{{ $s->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-12">
                     <label class="form-label small fw-semibold">Discussion Note</label>
-                    <textarea name="discussion_note" class="form-control form-control-sm" rows="3" placeholder="Enter discussion details...">{{ old('discussion_note') }}</textarea>
+                    <textarea name="discussion_note" class="form-control form-control-sm" rows="3"
+                        placeholder="Enter discussion details...">{{ old('discussion_note') }}</textarea>
                 </div>
             </div>
 
@@ -280,14 +305,16 @@
                     <select name="course_name" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
                         @foreach($courseNameOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('course_name') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                            <option value="{{ $opt->name }}" {{ old('course_name') == $opt->name ? 'selected' : '' }}>
+                                {{ $opt->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Date of Purchase</label>
-                    <input type="date" name="date_of_purchase" class="form-control form-control-sm" value="{{ old('date_of_purchase') }}">
+                    <input type="date" name="date_of_purchase" class="form-control form-control-sm"
+                        value="{{ old('date_of_purchase') }}">
                 </div>
 
                 <div class="col-md-4">
@@ -295,7 +322,8 @@
                     <select name="branch" class="form-select form-select-sm">
                         <option value="">-- Select --</option>
                         @foreach($branchOptions as $opt)
-                            <option value="{{ $opt->name }}" {{ old('branch') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}</option>
+                            <option value="{{ $opt->name }}" {{ old('branch') == $opt->name ? 'selected' : '' }}>{{ $opt->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -480,20 +508,20 @@
                         : '—';
 
                     $tbody.append(`
-                        <tr>
-                            <td>#${r.id}</td>
-                            <td>${r.parents_name}</td>
-                            <td>${r.phone}</td>
-                            <td>${r.district}</td>
-                            <td>${r.interested_for || '—'}</td>
-                            <td>${cs}</td>
-                            <td>${r.query_source || '—'}</td>
-                            <td>${r.query_status || '—'}</td>
-                            <td>${r.assigned_person || '—'}</td>
-                            <td>${r.data_source}</td>
-                            <td>${r.date}</td>
-                        </tr>
-                    `);
+                            <tr>
+                                <td>#${r.id}</td>
+                                <td>${r.parents_name}</td>
+                                <td>${r.phone}</td>
+                                <td>${r.district}</td>
+                                <td>${r.interested_for || '—'}</td>
+                                <td>${cs}</td>
+                                <td>${r.query_source || '—'}</td>
+                                <td>${r.query_status || '—'}</td>
+                                <td>${r.assigned_person || '—'}</td>
+                                <td>${r.data_source}</td>
+                                <td>${r.date}</td>
+                            </tr>
+                        `);
                 });
 
                 $('#historyPrev').prop('disabled', currentPage === 0);
