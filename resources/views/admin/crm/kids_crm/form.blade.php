@@ -33,6 +33,17 @@
         </div>
     </div>
 
+    {{-- ===================== CRM SWITCHER ===================== --}}
+    <div class="alert alert-primary d-flex align-items-center justify-content-between mb-3 shadow-sm border-0" style="background-color: #e0f2fe; color: #0369a1;">
+        <div>
+            <i class="bi bi-info-circle-fill me-2 fs-5 align-middle"></i>
+            <span class="align-middle"><strong>Is this a Teacher customer?</strong> Switch to the Teachers CRM.</span>
+        </div>
+        <a href="{{ route('crm.teachers_crm.form', request()->query()) }}" class="btn btn-primary fw-bold px-4 shadow-sm">
+            Switch to Teachers CRM <i class="bi bi-arrow-right-circle ms-1"></i>
+        </a>
+    </div>
+
     {{-- ===================== FAQ MODAL ===================== --}}
     <div class="modal fade" id="faqModal" tabindex="-1">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
