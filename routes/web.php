@@ -36,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/crm/call-back-report', [CallBackController::class, 'index'])->name('crm.callback.report');
 
     // FAQ Search API
-    Route::get('/light-of-hope/crm/faq/search', [FAQController::class, 'search'])
+    Route::get('/crm/faq/search', [FAQController::class, 'search'])
         ->name('faq.search');
 
     // Resources
